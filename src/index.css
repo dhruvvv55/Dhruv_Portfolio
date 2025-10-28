@@ -1,0 +1,221 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Light mode - Cyber aesthetic with proper contrast */
+    --background: 180 20% 98%;
+    --foreground: 220 30% 8%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 30% 8%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 30% 8%;
+
+    --primary: 174 85% 40%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 180 15% 90%;
+    --secondary-foreground: 220 30% 8%;
+
+    --muted: 180 15% 94%;
+    --muted-foreground: 220 15% 40%;
+
+    --accent: 174 85% 40%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 180 20% 88%;
+    --input: 180 20% 88%;
+    --ring: 174 85% 40%;
+
+    --radius: 0.5rem;
+    
+    /* Cybersecurity theme custom tokens - Light */
+    --cyber-glow: 174 85% 40%;
+    --cyber-green: 142 70% 42%;
+    --cyber-red: 0 72% 51%;
+    --terminal-bg: 180 20% 96%;
+    --grid-color: 180 15% 90%;
+    
+    /* Gradients */
+    --gradient-cyber: linear-gradient(135deg, hsl(174 85% 40% / 0.1), hsl(142 70% 42% / 0.08));
+    --gradient-glow: radial-gradient(circle, hsl(174 85% 40% / 0.15) 0%, transparent 70%);
+    
+    /* Shadows */
+    --shadow-glow: 0 0 20px hsl(var(--cyber-glow) / 0.25);
+    --shadow-intense: 0 0 40px hsl(var(--cyber-glow) / 0.4);
+    
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-glow: box-shadow 0.3s ease, border-color 0.3s ease;
+
+    --sidebar-background: 180 20% 98%;
+    --sidebar-foreground: 220 30% 8%;
+    --sidebar-primary: 174 85% 40%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 180 15% 94%;
+    --sidebar-accent-foreground: 220 30% 8%;
+    --sidebar-border: 180 20% 88%;
+    --sidebar-ring: 174 85% 40%;
+  }
+
+  .dark {
+    /* Dark mode cyber theme */
+    --background: 220 20% 6%;
+    --foreground: 180 100% 90%;
+
+    --card: 220 18% 10%;
+    --card-foreground: 180 100% 90%;
+
+    --popover: 220 18% 10%;
+    --popover-foreground: 180 100% 90%;
+
+    --primary: 174 100% 50%;
+    --primary-foreground: 220 20% 6%;
+
+    --secondary: 140 100% 60%;
+    --secondary-foreground: 220 20% 6%;
+
+    --muted: 220 15% 15%;
+    --muted-foreground: 180 20% 60%;
+
+    --accent: 0 100% 60%;
+    --accent-foreground: 220 20% 6%;
+
+    --destructive: 0 100% 60%;
+    --destructive-foreground: 180 100% 90%;
+
+    --border: 180 30% 20%;
+    --input: 180 30% 20%;
+    --ring: 174 100% 50%;
+    
+    /* Cybersecurity theme custom tokens - Dark */
+    --cyber-glow: 174 100% 50%;
+    --cyber-green: 140 100% 60%;
+    --cyber-red: 0 100% 60%;
+    --terminal-bg: 220 20% 8%;
+    --grid-color: 180 30% 15%;
+    
+    /* Gradients */
+    --gradient-cyber: linear-gradient(135deg, hsl(174 100% 50% / 0.1), hsl(140 100% 60% / 0.1));
+    --gradient-glow: radial-gradient(circle, hsl(174 100% 50% / 0.2) 0%, transparent 70%);
+    
+    /* Shadows */
+    --shadow-glow: 0 0 20px hsl(var(--cyber-glow) / 0.5);
+    --shadow-intense: 0 0 40px hsl(var(--cyber-glow) / 0.8);
+
+    --sidebar-background: 220 20% 6%;
+    --sidebar-foreground: 180 100% 90%;
+    --sidebar-primary: 174 100% 50%;
+    --sidebar-primary-foreground: 220 20% 6%;
+    --sidebar-accent: 220 18% 10%;
+    --sidebar-accent-foreground: 180 100% 90%;
+    --sidebar-border: 180 30% 20%;
+    --sidebar-ring: 174 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  /* Cyber grid background */
+  .cyber-grid {
+    background-image: 
+      linear-gradient(hsl(var(--grid-color)) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--grid-color)) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+  
+  /* Glowing border effect */
+  .glow-border {
+    position: relative;
+    border: 1px solid hsl(var(--primary) / 0.3);
+    transition: var(--transition-glow);
+  }
+  
+  .glow-border:hover {
+    border-color: hsl(var(--primary));
+    box-shadow: var(--shadow-glow);
+  }
+  
+  /* Terminal window styling */
+  .terminal-window {
+    @apply bg-[hsl(var(--terminal-bg))] border border-primary/30 rounded-sm;
+    box-shadow: 0 0 15px hsl(var(--primary) / 0.2);
+  }
+  
+  /* Scan line animation */
+  @keyframes scan {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100vh); }
+  }
+  
+  .scan-line {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(transparent, hsl(var(--primary) / 0.5), transparent);
+    animation: scan 8s linear infinite;
+    pointer-events: none;
+    z-index: 9999;
+  }
+  
+  /* Typing animation */
+  @keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+  }
+  
+  @keyframes blink {
+    50% { border-color: transparent; }
+  }
+  
+  .typing-effect {
+    overflow: hidden;
+    border-right: 2px solid hsl(var(--primary));
+    white-space: nowrap;
+    animation: typing 3s steps(40) 1s, blink 0.75s step-end infinite;
+  }
+  
+  /* Glitch effect */
+  @keyframes glitch {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+  }
+  
+  .glitch:hover {
+    animation: glitch 0.3s infinite;
+  }
+  
+  /* Hexagon pattern */
+  .hex-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg width='28' height='49' viewBox='0 0 28 49' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2300ffcc' fill-opacity='0.05' fill-rule='evenodd'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9z'/%3E%3C/g%3E%3C/svg%3E");
+  }
+}
