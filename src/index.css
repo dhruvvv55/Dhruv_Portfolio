@@ -1,0 +1,192 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Cybersecurity editorial palette — confident, restrained, technical. All colors HSL. */
+
+@layer base {
+  :root {
+    --background: 60 20% 98%;
+    --foreground: 225 25% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 225 25% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 225 25% 10%;
+
+    --primary: 90 70% 32%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 60 12% 94%;
+    --secondary-foreground: 225 25% 10%;
+
+    --muted: 60 12% 94%;
+    --muted-foreground: 225 8% 42%;
+
+    --accent: 90 70% 32%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 60 10% 88%;
+    --input: 60 10% 88%;
+    --ring: 90 70% 32%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 60 20% 98%;
+    --sidebar-foreground: 225 25% 10%;
+    --sidebar-primary: 90 70% 32%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 60 12% 94%;
+    --sidebar-accent-foreground: 225 25% 10%;
+    --sidebar-border: 60 10% 88%;
+    --sidebar-ring: 90 70% 32%;
+  }
+
+  .dark {
+    --background: 225 25% 6%;
+    --foreground: 60 25% 95%;
+
+    --card: 225 22% 9%;
+    --card-foreground: 60 25% 95%;
+
+    --popover: 225 22% 9%;
+    --popover-foreground: 60 25% 95%;
+
+    --primary: 75 90% 60%;
+    --primary-foreground: 225 25% 6%;
+
+    --secondary: 225 18% 14%;
+    --secondary-foreground: 60 25% 95%;
+
+    --muted: 225 18% 14%;
+    --muted-foreground: 220 8% 60%;
+
+    --accent: 75 90% 60%;
+    --accent-foreground: 225 25% 6%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 60 25% 95%;
+
+    --border: 225 18% 18%;
+    --input: 225 18% 18%;
+    --ring: 75 90% 60%;
+
+    --sidebar-background: 225 25% 6%;
+    --sidebar-foreground: 60 25% 95%;
+    --sidebar-primary: 75 90% 60%;
+    --sidebar-primary-foreground: 225 25% 6%;
+    --sidebar-accent: 225 18% 14%;
+    --sidebar-accent-foreground: 60 25% 95%;
+    --sidebar-border: 225 18% 18%;
+    --sidebar-ring: 75 90% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-feature-settings: "ss01", "cv11";
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  .font-serif {
+    font-family: 'Instrument Serif', 'Times New Roman', serif;
+    font-feature-settings: "ss01";
+  }
+}
+
+@layer components {
+  /* Subtle cyber grid — ambient texture, very low opacity */
+  .cyber-grid {
+    background-image:
+      linear-gradient(to right, hsl(var(--primary) / 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--primary) / 0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+
+  /* Editorial section number */
+  .section-num {
+    @apply font-mono text-xs uppercase tracking-[0.2em] text-muted-foreground;
+  }
+
+  /* Editorial card — subtle border, hover lift, no glow spam */
+  .editorial-card {
+    @apply bg-card border border-border rounded-lg transition-all duration-300;
+  }
+  .editorial-card:hover {
+    border-color: hsl(var(--primary) / 0.5);
+    transform: translateY(-2px);
+  }
+
+  /* Display heading utility */
+  .heading-display {
+    @apply text-4xl md:text-5xl lg:text-6xl font-medium leading-[1.05] tracking-tight;
+  }
+
+  /* Pill / tag */
+  .pill {
+    @apply inline-flex items-center px-2.5 py-1 text-xs font-mono rounded-md bg-muted border border-border text-foreground/80;
+  }
+
+  /* Terminal-style mini badge */
+  .terminal-badge {
+    @apply font-mono text-xs uppercase tracking-wider;
+  }
+
+  /* Pulsing status dot */
+  .status-dot {
+    position: relative;
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: hsl(var(--primary));
+    border-radius: 9999px;
+  }
+  .status-dot::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background: hsl(var(--primary));
+    animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes ping {
+    0% { transform: scale(1); opacity: 0.7; }
+    75%, 100% { transform: scale(3); opacity: 0; }
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+
+  .animate-fade-up {
+    animation: fade-up 0.6s ease-out backwards;
+  }
+
+  .animate-blink {
+    animation: blink 1s steps(1) infinite;
+  }
+}
