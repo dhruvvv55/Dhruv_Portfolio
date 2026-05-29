@@ -64,7 +64,7 @@ export const Hero = () => {
     <section
       id="top"
       ref={sectionRef}
-      className="relative flex flex-col pt-24 pb-12 overflow-hidden"
+      className="relative flex flex-col pt-20 pb-4 overflow-hidden"
     >
       {/* PARALLAX BACKGROUND SHAPES */}
       <div className="absolute inset-0 pointer-events-none">
@@ -125,7 +125,7 @@ export const Hero = () => {
       {/* CONTENT */}
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         {/* Top status row — casual */}
-        <div className="flex items-center gap-3 mb-10 animate-fade-up">
+        <div className="flex items-center gap-3 mb-4 animate-fade-up">
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary" />
@@ -140,7 +140,7 @@ export const Hero = () => {
         </div>
 
         {/* NAME + PHOTO row */}
-        <div className="flex items-center justify-between gap-8 mb-8">
+        <div className="flex items-center justify-between gap-8 mb-4">
           {/* Name block */}
           <div className="min-w-0">
             {/* small kicker */}
