@@ -172,7 +172,7 @@ export const Hero = () => {
             {/* Patel */}
             <h1
               className="font-serif italic font-medium leading-[0.84] tracking-tight animate-fade-up select-none flex items-baseline gap-2 md:gap-4 flex-wrap"
-              style={{ fontSize: "clamp(4rem, 9.5vw, 9.5rem)", animationDelay: "0.16s" }}
+              style={{ fontSize: "clamp(4rem, 9vw, 9rem)", animationDelay: "0.16s" }}
             >
               {"Patel".split("").map((ch, i) => (
                 <span
