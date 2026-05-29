@@ -154,7 +154,7 @@ export const Hero = () => {
             {/* Dhruv Ashok */}
             <h1
               className="font-serif font-medium leading-[0.84] tracking-tight animate-fade-up select-none"
-              style={{ fontSize: "clamp(3rem, 8vw, 8rem)", animationDelay: "0.1s" }}
+              style={{ fontSize: "clamp(3rem, 10vw, 9rem)", animationDelay: "0.1s" }}
             >
               {"Dhruv Ashok".split("").map((ch, i) => (
                 <span
@@ -228,11 +228,11 @@ export const Hero = () => {
                 {/* Caption bar */}
                 <div className="px-4 py-3 flex items-center justify-between border-t border-border">
                   <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-foreground/70">
-                    Dhruv A. Patel
+                    Dhruv Ashok Patel
                   </span>
                   <span className="flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-wider text-primary">
                     <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                    open to work
+                    open to Impactful work
                   </span>
                 </div>
               </div>
@@ -263,9 +263,9 @@ export const Hero = () => {
           className="text-base md:text-lg text-foreground/65 max-w-2xl leading-relaxed mb-4 animate-fade-up"
           style={{ animationDelay: "0.25s" }}
         >
-          MS Cybersecurity Engineering at USC, three peer-reviewed papers, and currently
-          digging into how LLM-powered agents break. Looking for a full-time team to build
-          secure things with.
+          MS Cybersecurity Engineering at USC, exploring DFIR, 
+          malware reverse engineering, and adversarial attacks on LLM agents.
+          Looking for a full-time team to build secure things with.
         </p>
 
         {/* Action row — magnetic primary button */}

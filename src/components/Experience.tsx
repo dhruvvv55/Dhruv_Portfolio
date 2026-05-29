@@ -1,4 +1,5 @@
 import { SectionHeader } from "./SectionHeader";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const experience = [
   {
@@ -19,8 +20,14 @@ const experience = [
 ];
 
 export const Experience = () => {
+  const { ref, visible } = useScrollReveal();
+
   return (
-    <section id="experience" className="py-24 md:py-32 border-t border-border">
+    <section
+      ref={ref as React.RefObject<HTMLElement>}
+      id="experience"
+      className={`reveal ${visible ? "is-visible" : ""} py-24 md:py-32 border-t border-border`}
+    >
       <div className="container mx-auto px-6 max-w-6xl">
         <SectionHeader
           number="03"

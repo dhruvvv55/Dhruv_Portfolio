@@ -1,12 +1,6 @@
 import { SectionHeader } from "./SectionHeader";
 import { Code2, ShieldCheck, Wrench, Cpu, Cloud, FileCheck, GitBranch, Brain } from "lucide-react";
-
-/* ─────────────────────────────────────────────────────────────
-   Skill icons — uses simple-icons CDN (https://simpleicons.org)
-   Format: https://cdn.simpleicons.org/<slug>/<color>
-   For tools without a brand logo (Vulnerability Assessment, etc.)
-   we just render the text in a pill.
-   ───────────────────────────────────────────────────────────── */
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 type Skill = { name: string; slug?: string };
 
@@ -143,8 +137,14 @@ const SkillIcon = ({ skill }: { skill: Skill }) => {
 };
 
 export const Skills = () => {
+  const { ref, visible } = useScrollReveal();
+
   return (
-    <section id="skills" className="py-24 md:py-32 border-t border-border">
+    <section
+      ref={ref as React.RefObject<HTMLElement>}
+      id="skills"
+      className={`reveal ${visible ? "is-visible" : ""} py-24 md:py-32 border-t border-border`}
+    >
       <div className="container mx-auto px-6 max-w-6xl">
         <SectionHeader
           number="04"

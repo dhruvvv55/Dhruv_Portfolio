@@ -1,9 +1,16 @@
 import { SectionHeader } from "./SectionHeader";
 import { Trophy, Shield, Code2, Star } from "lucide-react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 export const Activities = () => {
+  const { ref, visible } = useScrollReveal();
+
   return (
-    <section id="activities" className="py-24 md:py-32 border-t border-border">
+    <section
+      ref={ref as React.RefObject<HTMLElement>}
+      id="activities"
+      className={`reveal ${visible ? "is-visible" : ""} py-24 md:py-32 border-t border-border`}
+    >
       <div className="container mx-auto px-6 max-w-6xl">
         <SectionHeader
           number="07"
@@ -33,7 +40,6 @@ export const Activities = () => {
                 <p className="text-sm text-primary font-mono">CyberPeace Foundation</p>
               </div>
 
-              {/* Big trophy */}
               <div className="flex items-center justify-center">
                 <div className="relative">
                   <div className="absolute inset-0 bg-primary/20 blur-2xl rounded-full" />
@@ -43,7 +49,6 @@ export const Activities = () => {
             </div>
           </div>
 
-          {/* CyberPeace Social Internship */}
           <div className="editorial-card p-6 animate-fade-up" style={{ animationDelay: "0.08s" }}>
             <div className="flex items-start justify-between mb-4">
               <Shield className="w-8 h-8 text-primary" strokeWidth={1.5} />
@@ -58,7 +63,6 @@ export const Activities = () => {
             </p>
           </div>
 
-          {/* Web/Mobile dev internships */}
           <div className="editorial-card p-6 animate-fade-up" style={{ animationDelay: "0.16s" }}>
             <div className="flex items-start justify-between mb-4">
               <Code2 className="w-8 h-8 text-primary" strokeWidth={1.5} />

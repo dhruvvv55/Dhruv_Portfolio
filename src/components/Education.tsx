@@ -1,5 +1,6 @@
 import { SectionHeader } from "./SectionHeader";
-import { MapPin, GraduationCap } from "lucide-react";
+import { MapPin } from "lucide-react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const education = [
   {
@@ -19,7 +20,7 @@ const education = [
       "Computer Systems Assurance",
     ],
     logo: "/logos/usc.webp",
-    logoBg: "#990000", // USC cardinal red — seal sits on its native brand color
+    logoBg: "#990000",
   },
   {
     n: "02",
@@ -39,13 +40,19 @@ const education = [
       "DL for Cybersecurity",
     ],
     logo: "/logos/tcet.jpeg",
-    logoBg: "#FFFFFF", // White — matches TCET's native background
+    logoBg: "#FFFFFF",
   },
 ];
 
 export const Education = () => {
+  const { ref, visible } = useScrollReveal();
+
   return (
-    <section id="education" className="py-24 md:py-32 border-t border-border">
+    <section
+      ref={ref as React.RefObject<HTMLElement>}
+      id="education"
+      className={`reveal ${visible ? "is-visible" : ""} py-24 md:py-32 border-t border-border`}
+    >
       <div className="container mx-auto px-6 max-w-6xl">
         <SectionHeader
           number="02"
@@ -82,7 +89,6 @@ export const Education = () => {
                         alt={`${edu.school} logo`}
                         className="w-full h-full object-cover"
                         onError={(e) => {
-                          // Fallback to icon if logo file missing
                           e.currentTarget.style.display = "none";
                           const parent = e.currentTarget.parentElement;
                           if (parent && !parent.querySelector(".fallback-icon")) {

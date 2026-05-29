@@ -1,5 +1,6 @@
 import { SectionHeader } from "./SectionHeader";
 import { ExternalLink } from "lucide-react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const wins = [
   {
@@ -53,8 +54,14 @@ const wins = [
 ];
 
 export const Wins = () => {
+  const { ref, visible } = useScrollReveal();
+
   return (
-    <section id="wins" className="py-24 md:py-32 border-t border-border">
+    <section
+      ref={ref as React.RefObject<HTMLElement>}
+      id="wins"
+      className={`reveal ${visible ? "is-visible" : ""} py-24 md:py-32 border-t border-border`}
+    >
       <div className="container mx-auto px-6 max-w-6xl">
         <SectionHeader
           number="06"
@@ -69,7 +76,7 @@ export const Wins = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {wins.map((win, idx) => (
-            <a
+            <a  
               key={idx}
               href={win.link}
               target="_blank"
@@ -77,24 +84,20 @@ export const Wins = () => {
               className="group editorial-card overflow-hidden animate-fade-up block"
               style={{ animationDelay: `${idx * 0.05}s` }}
             >
-              {/* Image preview */}
               <div className="relative aspect-video bg-white border-b border-border overflow-hidden">
                 <img
                   src={win.image}
                   alt={win.title}
                   className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                 />
-                {/* Type badge */}
                 <span className="absolute top-3 left-3 px-2 py-1 bg-background/85 backdrop-blur-sm border border-primary/40 rounded-md text-[10px] font-mono uppercase tracking-wider text-primary z-10">
                   {win.type}
                 </span>
-                {/* Hover external-link */}
                 <div className="absolute top-3 right-3 p-1.5 bg-background/85 backdrop-blur-sm border border-border rounded-md opacity-0 group-hover:opacity-100 transition-opacity z-10">
                   <ExternalLink className="w-3.5 h-3.5" />
                 </div>
               </div>
 
-              {/* Text */}
               <div className="p-5">
                 <div className="flex items-center justify-between gap-2 mb-2">
                   <span className="text-xs font-medium text-primary uppercase tracking-wider font-mono">

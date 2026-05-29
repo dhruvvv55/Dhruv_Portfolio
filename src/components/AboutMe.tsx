@@ -1,6 +1,14 @@
+import { useScrollReveal } from "@/hooks/useScrollReveal";
+
 export const AboutMe = () => {
+  const { ref, visible } = useScrollReveal();
+
   return (
-    <section id="about" className="relative py-24 md:py-36 border-t border-border">
+    <section
+      ref={ref as React.RefObject<HTMLElement>}
+      id="about"
+      className={`reveal ${visible ? "is-visible" : ""} relative py-24 md:py-36 border-t border-border`}
+    >
       <div className="container mx-auto px-6 max-w-6xl">
         {/* Section header — editorial style */}
         <div className="grid lg:grid-cols-[1fr,3fr] gap-8 mb-16 animate-fade-up">
