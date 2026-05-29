@@ -64,7 +64,7 @@ export const Hero = () => {
     <section
       id="top"
       ref={sectionRef}
-      className="relative min-h-screen flex flex-col justify-center pt-24 pb-8 overflow-hidden"
+      className="relative flex flex-col pt-32 pb-16 overflow-hidden"
     >
       {/* PARALLAX BACKGROUND SHAPES */}
       <div className="absolute inset-0 pointer-events-none">
@@ -154,7 +154,7 @@ export const Hero = () => {
             {/* Dhruv Ashok */}
             <h1
               className="font-serif font-medium leading-[0.84] tracking-tight animate-fade-up select-none"
-              style={{ fontSize: "clamp(2.5rem, 6.5vw, 6.5rem)", animationDelay: "0.1s" }}
+              style={{ fontSize: "clamp(3rem, 8vw, 8rem)", animationDelay: "0.1s" }}
             >
               {"Dhruv Ashok".split("").map((ch, i) => (
                 <span
@@ -172,7 +172,7 @@ export const Hero = () => {
             {/* Patel */}
             <h1
               className="font-serif italic font-medium leading-[0.84] tracking-tight animate-fade-up select-none flex items-baseline gap-2 md:gap-4 flex-wrap"
-              style={{ fontSize: "clamp(3.25rem, 9vw, 9rem)", animationDelay: "0.16s" }}
+              style={{ fontSize: "clamp(4rem, 11.5vw, 11.5rem)", animationDelay: "0.16s" }}
             >
               {"Patel".split("").map((ch, i) => (
                 <span
