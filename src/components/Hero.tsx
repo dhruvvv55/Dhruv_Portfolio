@@ -64,7 +64,7 @@ export const Hero = () => {
     <section
       id="top"
       ref={sectionRef}
-      className="relative flex flex-col pt-20 pb-4 overflow-hidden"
+      className="relative flex flex-col pt-16 pb-2 overflow-hidden"
     >
       {/* PARALLAX BACKGROUND SHAPES */}
       <div className="absolute inset-0 pointer-events-none">
@@ -125,7 +125,7 @@ export const Hero = () => {
       {/* CONTENT */}
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         {/* Top status row — casual */}
-        <div className="flex items-center gap-3 mb-4 animate-fade-up">
+        <div className="flex items-center gap-3 mb-2 animate-fade-up">
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary" />
@@ -140,7 +140,7 @@ export const Hero = () => {
         </div>
 
         {/* NAME + PHOTO row */}
-        <div className="flex items-center justify-between gap-8 mb-4">
+        <div className="flex items-center justify-between gap-8 mb-3">
           {/* Name block */}
           <div className="min-w-0">
             {/* small kicker */}
@@ -172,7 +172,7 @@ export const Hero = () => {
             {/* Patel */}
             <h1
               className="font-serif italic font-medium leading-[0.84] tracking-tight animate-fade-up select-none flex items-baseline gap-2 md:gap-4 flex-wrap"
-              style={{ fontSize: "clamp(3.5rem, min(9vw, 11vh), 9rem)", animationDelay: "0.16s" }}
+              style={{ fontSize: "clamp(4rem, 11.5vw, 11.5rem)", animationDelay: "0.16s" }}
             >
               {"Patel".split("").map((ch, i) => (
                 <span
@@ -242,7 +242,7 @@ export const Hero = () => {
 
         {/* Subtitle — playful, with rotating role */}
         <div
-          className="flex items-baseline flex-wrap gap-x-3 gap-y-1 mb-5 animate-fade-up"
+          className="flex items-baseline flex-wrap gap-x-3 gap-y-1 mb-3 animate-fade-up"
           style={{ animationDelay: "0.2s" }}
         >
           <span className="text-xl md:text-2xl text-foreground/80">a</span>
@@ -260,7 +260,7 @@ export const Hero = () => {
 
         {/* Real description */}
         <p
-          className="text-base md:text-lg text-foreground/65 max-w-2xl leading-relaxed mb-7 animate-fade-up"
+          className="text-base md:text-lg text-foreground/65 max-w-2xl leading-relaxed mb-4 animate-fade-up"
           style={{ animationDelay: "0.25s" }}
         >
           MS Cybersecurity Engineering at USC, three peer-reviewed papers, and currently
