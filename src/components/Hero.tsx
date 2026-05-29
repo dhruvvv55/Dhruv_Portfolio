@@ -172,7 +172,7 @@ export const Hero = () => {
             {/* Patel */}
             <h1
               className="font-serif italic font-medium leading-[0.84] tracking-tight animate-fade-up select-none flex items-baseline gap-2 md:gap-4 flex-wrap"
-              style={{ fontSize: "clamp(4rem, 11.5vw, 11.5rem)", animationDelay: "0.16s" }}
+              style={{ fontSize: "clamp(4rem, 9.5vw, 9.5rem)", animationDelay: "0.16s" }}
             >
               {"Patel".split("").map((ch, i) => (
                 <span
@@ -270,7 +270,7 @@ export const Hero = () => {
 
         {/* Action row — magnetic primary button */}
         <div
-          className="flex flex-wrap items-center gap-3 mb-10 animate-fade-up"
+          className="flex flex-wrap items-center gap-3 mb-4 animate-fade-up"
           style={{ animationDelay: "0.3s" }}
         >
           <button
