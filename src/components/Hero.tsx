@@ -64,7 +64,7 @@ export const Hero = () => {
     <section
       id="top"
       ref={sectionRef}
-      className="relative flex flex-col pt-32 pb-16 overflow-hidden"
+      className="relative flex flex-col pt-24 pb-12 overflow-hidden"
     >
       {/* PARALLAX BACKGROUND SHAPES */}
       <div className="absolute inset-0 pointer-events-none">
