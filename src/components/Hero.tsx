@@ -208,7 +208,7 @@ export const Hero = () => {
               {/* Photo */}
               <div
                 className="relative rounded-2xl overflow-hidden border border-border bg-card"
-                style={{ width: "clamp(200px, 21vw, 280px)" }}
+                style={{ width: "clamp(240px, 26vw, 360px)" }}
               >
                 <div className="aspect-[4/5] overflow-hidden">
                   <img
