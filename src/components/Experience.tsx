@@ -1,5 +1,4 @@
 import { SectionHeader } from "./SectionHeader";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const experience = [
   {
@@ -9,43 +8,33 @@ const experience = [
     title: "Cybersecurity Intern",
     company: "Crossover Technology Pvt. Ltd.",
     period: "Mar 2025 – Jun 2025",
-    summary: "Embedded with the security operations team. Owned Python automation that accelerated vulnerability triage and participated in real-world incident response workflows.",
+    summary:
+      "Embedded with the security operations team on daily SIEM alert triage and log analysis. Handled 50+ security alerts per day and built structured incident documentation the SOC could act on.",
     bullets: [
-      "Improved threat detection efficiency by 30% by developing Python-based security automation scripts to accelerate vulnerability triage and reduce mean-time-to-detect across security operations.",
-      "Performed manual vulnerability scans across internal systems, triaging findings by severity and communicating results to the security team to support prioritized remediation.",
-      "Participated in security team meetings, gaining exposure to real-world incident response workflows, threat discussion, and cross-functional security decision-making processes.",
+      "Reduced alert triage time by monitoring and classifying 50+ daily security alerts across the SIEM dashboard, escalating confirmed threats by severity to the security team for remediation.",
+      "Improved incident documentation accuracy by parsing and analyzing system logs to identify anomalous activity patterns, producing structured reports for the security operations team.",
     ],
-    tags: ["Python", "Security Automation", "Vulnerability Assessment", "Incident Response"],
+    tags: ["SIEM", "Alert Triage", "Log Analysis", "Incident Response", "SOC Operations"],
   },
 ];
 
 export const Experience = () => {
-  const { ref, visible } = useScrollReveal();
-
   return (
-    <section
-      ref={ref as React.RefObject<HTMLElement>}
-      id="experience"
-      className={`reveal ${visible ? "is-visible" : ""} py-24 md:py-32 border-t border-border`}
-    >
+    <section id="experience" className="reveal py-24 md:py-32 border-t border-border">
       <div className="container mx-auto px-6 max-w-6xl">
         <SectionHeader
           number="03"
           label="experience"
           title={
             <>
-              Hands-on industry <span className="font-serif italic text-primary">security engineering.</span>
+              Hands-on <span className="font-serif italic text-primary">SOC operations.</span>
             </>
           }
         />
 
         <div className="space-y-8">
           {experience.map((exp, idx) => (
-            <div
-              key={idx}
-              className="editorial-card p-6 md:p-10 animate-fade-up"
-              style={{ animationDelay: `${idx * 0.1}s` }}
-            >
+            <div key={idx} className="editorial-card p-6 md:p-10">
               <div className="flex flex-wrap items-start justify-between gap-4 mb-6">
                 <div className="flex items-start gap-4">
                   <div

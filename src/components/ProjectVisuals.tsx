@@ -588,16 +588,182 @@ export const TryHackMeArchitecture = () => (
 );
 
 /* ============================================================
+   SOC DETECTION LAB — clean detection graph visual
+   ============================================================ */
+
+export const SocLabHero = () => (
+  <svg viewBox="0 0 400 250" className="w-full h-full" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <pattern id="soc-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="hsl(var(--primary) / 0.08)" strokeWidth="0.5" />
+      </pattern>
+      <linearGradient id="soc-line" x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0" />
+        <stop offset="50%" stopColor="hsl(var(--primary))" stopOpacity="1" />
+        <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
+      </linearGradient>
+    </defs>
+    <rect width="400" height="250" fill="url(#soc-grid)" />
+
+    {/* Header row */}
+    <g transform="translate(20, 20)">
+      <rect width="120" height="22" rx="11" fill="hsl(var(--primary) / 0.15)" stroke="hsl(var(--primary) / 0.4)" />
+      <circle cx="12" cy="11" r="3" fill="hsl(var(--primary))" />
+      <text x="22" y="15" fill="hsl(var(--primary))" fontSize="9" fontFamily="JetBrains Mono" letterSpacing="0.05em">WAZUH · LIVE</text>
+    </g>
+    <text x="380" y="35" fill="hsl(var(--muted-foreground))" fontFamily="JetBrains Mono" fontSize="9" textAnchor="end">15+ signals · 8 techniques</text>
+
+    {/* Alert pipeline nodes */}
+    {[
+      { x: 40, label: "Sysmon" },
+      { x: 130, label: "Wazuh" },
+      { x: 220, label: "VT enrich" },
+      { x: 320, label: "Splunk" },
+    ].map((n, i) => (
+      <g key={i} transform={`translate(${n.x}, 130)`}>
+        <rect width="60" height="34" rx="6" fill="hsl(var(--card))" stroke="hsl(var(--primary) / 0.4)" strokeWidth="1" />
+        <text x="30" y="22" fill="hsl(var(--foreground))" fontFamily="JetBrains Mono" fontSize="9" textAnchor="middle">{n.label}</text>
+      </g>
+    ))}
+    {/* connecting lines */}
+    <line x1="100" y1="147" x2="130" y2="147" stroke="url(#soc-line)" strokeWidth="1.5" />
+    <line x1="190" y1="147" x2="220" y2="147" stroke="url(#soc-line)" strokeWidth="1.5" />
+    <line x1="280" y1="147" x2="320" y2="147" stroke="url(#soc-line)" strokeWidth="1.5" />
+
+    {/* ATT&CK tags */}
+    <g transform="translate(20, 200)" fontFamily="JetBrains Mono" fontSize="8">
+      {["T1003", "T1055", "T1547", "T1059"].map((t, i) => (
+        <g key={t} transform={`translate(${i * 70}, 0)`}>
+          <rect width="60" height="18" rx="4" fill="hsl(var(--primary) / 0.08)" stroke="hsl(var(--primary) / 0.3)" />
+          <text x="30" y="12" fill="hsl(var(--primary))" textAnchor="middle">{t}</text>
+        </g>
+      ))}
+    </g>
+  </svg>
+);
+
+/* ============================================================
+   CLOUD THREAT DETECTION LAB — GCP IAM escalation
+   ============================================================ */
+
+export const CloudLabHero = () => (
+  <svg viewBox="0 0 400 250" className="w-full h-full" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <pattern id="cloud-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="hsl(var(--primary) / 0.08)" strokeWidth="0.5" />
+      </pattern>
+    </defs>
+    <rect width="400" height="250" fill="url(#cloud-grid)" />
+
+    {/* Header */}
+    <g transform="translate(20, 20)">
+      <rect width="120" height="22" rx="11" fill="hsl(var(--primary) / 0.15)" stroke="hsl(var(--primary) / 0.4)" />
+      <circle cx="12" cy="11" r="3" fill="hsl(var(--primary))" />
+      <text x="22" y="15" fill="hsl(var(--primary))" fontSize="9" fontFamily="JetBrains Mono" letterSpacing="0.05em">GCP · DETECT</text>
+    </g>
+    <text x="380" y="35" fill="hsl(var(--muted-foreground))" fontFamily="JetBrains Mono" fontSize="9" textAnchor="end">T1078.004</text>
+
+    {/* Escalation flow */}
+    <g transform="translate(30, 90)" fontFamily="JetBrains Mono">
+      <rect width="130" height="50" rx="6" fill="hsl(var(--card))" stroke="hsl(var(--border))" strokeWidth="1" />
+      <text x="65" y="20" fill="hsl(var(--muted-foreground))" fontSize="8" textAnchor="middle">SERVICE ACCOUNT</text>
+      <text x="65" y="38" fill="hsl(var(--foreground))" fontSize="12" textAnchor="middle" fontWeight="500">roles/viewer</text>
+    </g>
+
+    {/* Arrow */}
+    <g transform="translate(170, 115)">
+      <line x1="0" y1="0" x2="55" y2="0" stroke="hsl(var(--primary))" strokeWidth="2" />
+      <polygon points="55,-5 65,0 55,5" fill="hsl(var(--primary))" />
+      <text x="30" y="-8" fill="hsl(var(--primary))" fontSize="8" fontFamily="JetBrains Mono" textAnchor="middle">SetIamPolicy</text>
+    </g>
+
+    <g transform="translate(240, 90)" fontFamily="JetBrains Mono">
+      <rect width="130" height="50" rx="6" fill="hsl(var(--primary) / 0.12)" stroke="hsl(var(--primary) / 0.6)" strokeWidth="1.5" />
+      <text x="65" y="20" fill="hsl(var(--primary))" fontSize="8" textAnchor="middle">ESCALATED TO</text>
+      <text x="65" y="38" fill="hsl(var(--primary))" fontSize="12" textAnchor="middle" fontWeight="600">roles/owner</text>
+    </g>
+
+    {/* Audit event log */}
+    <g transform="translate(30, 180)" fontFamily="JetBrains Mono" fontSize="9">
+      <text x="0" y="0" fill="hsl(var(--muted-foreground))">audit_events_analyzed</text>
+      <text x="340" y="0" fill="hsl(var(--primary))" textAnchor="end" fontWeight="500">32+</text>
+      <line x1="0" y1="8" x2="340" y2="8" stroke="hsl(var(--border))" strokeWidth="0.5" />
+      <text x="0" y="22" fill="hsl(var(--muted-foreground))">alerting</text>
+      <text x="340" y="22" fill="hsl(var(--primary))" textAnchor="end" fontWeight="500">automated · scheduled</text>
+    </g>
+  </svg>
+);
+
+/* ============================================================
+   AGENT INJECTION LAB — 5x5 attack/defense grid
+   ============================================================ */
+
+export const AgentLabHero = () => (
+  <svg viewBox="0 0 400 250" className="w-full h-full" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <pattern id="agent-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="hsl(var(--primary) / 0.08)" strokeWidth="0.5" />
+      </pattern>
+    </defs>
+    <rect width="400" height="250" fill="url(#agent-grid)" />
+
+    {/* Header */}
+    <g transform="translate(20, 20)">
+      <rect width="140" height="22" rx="11" fill="hsl(var(--primary) / 0.15)" stroke="hsl(var(--primary) / 0.4)" />
+      <circle cx="12" cy="11" r="3" fill="hsl(var(--primary))">
+        <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite" />
+      </circle>
+      <text x="22" y="15" fill="hsl(var(--primary))" fontSize="9" fontFamily="JetBrains Mono" letterSpacing="0.05em">AGENT · RED TEAM</text>
+    </g>
+    <text x="380" y="35" fill="hsl(var(--muted-foreground))" fontFamily="JetBrains Mono" fontSize="9" textAnchor="end">5 × 5 = 25 pairs</text>
+
+    {/* Attack × Defense matrix */}
+    <g transform="translate(90, 70)">
+      <text x="90" y="-8" fill="hsl(var(--muted-foreground))" fontSize="9" fontFamily="JetBrains Mono" textAnchor="middle">DEFENSES →</text>
+      <text x="-50" y="90" fill="hsl(var(--muted-foreground))" fontSize="9" fontFamily="JetBrains Mono" textAnchor="middle" transform="rotate(-90, -50, 90)">ATTACKS ↓</text>
+      {Array.from({ length: 5 }, (_, r) =>
+        Array.from({ length: 5 }, (_, c) => {
+          // Fake pattern: diagonal successes
+          const blocked = (r + c) % 2 === 0 || r === c;
+          return (
+            <rect
+              key={`${r}-${c}`}
+              x={c * 36}
+              y={r * 30}
+              width={32}
+              height={26}
+              rx={3}
+              fill={blocked ? "hsl(var(--primary) / 0.6)" : "hsl(var(--destructive) / 0.5)"}
+              stroke="hsl(var(--border))"
+              strokeWidth="0.5"
+            />
+          );
+        })
+      )}
+    </g>
+
+    {/* Legend */}
+    <g transform="translate(30, 220)" fontFamily="JetBrains Mono" fontSize="9">
+      <rect x="0" y="0" width="10" height="10" fill="hsl(var(--primary) / 0.6)" rx="2" />
+      <text x="16" y="9" fill="hsl(var(--muted-foreground))">blocked</text>
+      <rect x="80" y="0" width="10" height="10" fill="hsl(var(--destructive) / 0.5)" rx="2" />
+      <text x="96" y="9" fill="hsl(var(--muted-foreground))">succeeded</text>
+      <text x="380" y="9" fill="hsl(var(--primary))" textAnchor="end" fontWeight="500">live SSE stream</text>
+    </g>
+  </svg>
+);
+
+/* ============================================================
    Lookup map — used by Projects.tsx and ProjectDetail.tsx
    ============================================================ */
 
 export const projectVisuals: Record<
   string,
-  { hero: () => JSX.Element; architecture: () => JSX.Element }
+  { hero: () => JSX.Element; architecture?: () => JSX.Element }
 > = {
+  "soc-detection-lab": { hero: SocLabHero },
+  "cloud-threat-detection-lab": { hero: CloudLabHero },
+  "agent-injection-lab": { hero: AgentLabHero },
   quantumshop: { hero: QuantumShopHero, architecture: QuantumShopArchitecture },
   "malware-detection": { hero: MalwareHero, architecture: MalwareArchitecture },
-  "predictive-maintenance": { hero: MaintenanceHero, architecture: MaintenanceArchitecture },
-  "llm-agent-security": { hero: LLMHero, architecture: LLMArchitecture },
-  "tryhackme-labs": { hero: TryHackMeHero, architecture: TryHackMeArchitecture },
 };

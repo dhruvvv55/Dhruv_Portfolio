@@ -1,6 +1,5 @@
 import { SectionHeader } from "./SectionHeader";
 import { Mail, Github, Linkedin, MapPin, Phone, ArrowUpRight } from "lucide-react";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const channels = [
   {
@@ -30,14 +29,8 @@ const channels = [
 ];
 
 export const Contact = () => {
-  const { ref, visible } = useScrollReveal();
-
   return (
-    <section
-      ref={ref as React.RefObject<HTMLElement>}
-      id="contact"
-      className={`reveal ${visible ? "is-visible" : ""} py-24 md:py-32 border-t border-border`}
-    >
+    <section id="contact" className="py-24 md:py-32 border-t border-border">
       <div className="container mx-auto px-6 max-w-6xl">
         <SectionHeader
           number="08"

@@ -1,14 +1,6 @@
-import { useScrollReveal } from "@/hooks/useScrollReveal";
-
 export const AboutMe = () => {
-  const { ref, visible } = useScrollReveal();
-
   return (
-    <section
-      ref={ref as React.RefObject<HTMLElement>}
-      id="about"
-      className={`reveal ${visible ? "is-visible" : ""} relative py-24 md:py-36 border-t border-border`}
-    >
+    <section id="about" className="relative py-24 md:py-36 border-t border-border">
       <div className="container mx-auto px-6 max-w-6xl">
         {/* Section header — editorial style */}
         <div className="grid lg:grid-cols-[1fr,3fr] gap-8 mb-16 animate-fade-up">
@@ -60,10 +52,11 @@ export const AboutMe = () => {
                 I
               </span>
               <span>
-                'm a cybersecurity engineer and applied researcher. I've worked on everything from PE-image
-                malware classifiers and quantum-secure payment APIs to Python automation for vulnerability
-                triage. What I care about most is closing the gap between security research and a system
-                someone actually has to defend.
+                'm a detection engineer with a security researcher's mindset. I build SOC
+                detection pipelines with Wazuh + Splunk, hunt IAM privilege escalation in
+                GCP audit logs, and red-team LLM agents with indirect prompt injection.
+                What I care about most is closing the gap between security research and a
+                real detection someone actually ships to production.
               </span>
             </p>
 
@@ -73,7 +66,7 @@ export const AboutMe = () => {
                 "
               </span>
               <p className="font-serif italic text-2xl md:text-3xl leading-[1.3] text-foreground/90 max-w-3xl pl-2">
-                Ambiguous problems don't scare me. If anything, those are the ones I find most interesting.
+                A detection that never fires isn't defense — it's paperwork. I care about signals that catch real attackers.
               </p>
               <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground pl-2">
                 — Working principle
@@ -81,24 +74,24 @@ export const AboutMe = () => {
             </blockquote>
 
             <p className="text-lg md:text-xl leading-[1.7] text-foreground/85 mb-8">
-              At <strong className="text-foreground font-medium">Crossover Technology</strong> I wrote
-              Python automation that lifted threat detection efficiency by{" "}
-              <span className="text-primary font-medium">30%</span><sup className="text-xs text-muted-foreground ml-0.5">¹</sup> —
-              turning hours of manual vulnerability work into prioritized output the security team
+              At <strong className="text-foreground font-medium">Crossover Technology</strong> I
+              embedded with the security operations team, monitoring{" "}
+              <span className="text-primary font-medium">50+ daily SIEM alerts</span><sup className="text-xs text-muted-foreground ml-0.5">¹</sup>,
+              classifying them by severity, and producing structured incident reports the SOC
               could act on the same morning.
             </p>
 
             <p className="text-lg md:text-xl leading-[1.7] text-foreground/85">
-              <strong className="text-foreground font-medium">End-to-end builds</strong> are how I work
-              best. I led a quantum-secured payment system from BB84 protocol simulation through XGBoost
-              fraud scoring and Solidity smart contracts — one of{" "}
-              <strong className="text-foreground font-medium">three peer-reviewed papers</strong><sup className="text-xs text-muted-foreground ml-0.5">²</sup>{" "}
-              published from my undergraduate work.{" "}
-              <strong className="text-foreground font-medium">Adversarial thinking</strong> is what I
-              bring to AI: I'm currently researching prompt injection and data exfiltration in
-              LLM-powered agents.{" "}
-              <strong className="text-foreground font-medium">Cross-stack fluency</strong> lets me move
-              between Python research notebooks and React/FastAPI production in the same sprint.
+              <strong className="text-foreground font-medium">Detection first</strong> is how I
+              work. I built a home SOC lab with 15+ detection signals mapped to MITRE ATT&amp;CK,
+              a GCP threat detection pipeline for IAM privilege escalation, and a red-team lab
+              with a{" "}
+              <strong className="text-foreground font-medium">5×5 attack × defense matrix</strong><sup className="text-xs text-muted-foreground ml-0.5">²</sup>{" "}
+              for LLM agents.{" "}
+              <strong className="text-foreground font-medium">Adversarial thinking</strong> is
+              what I bring to AI security research.{" "}
+              <strong className="text-foreground font-medium">Cross-stack fluency</strong> lets
+              me move from Python detection scripts to React SSE dashboards in the same sprint.
             </p>
 
             {/* Footnotes */}
@@ -112,7 +105,7 @@ export const AboutMe = () => {
               </p>
               <p className="text-xs text-muted-foreground font-mono leading-relaxed">
                 <sup className="text-primary">²</sup>{" "}
-                JISEM (Apr 2025), IRJET (Oct 2024), IJARSCT (Aug 2024). See <a href="#projects" className="text-primary hover:underline">§04 Projects</a>.
+                5 attack classes × 5 defensive mitigations = 25 evaluated pairs. See <a href="#projects" className="text-primary hover:underline">§05 Projects</a>.
               </p>
             </div>
           </div>

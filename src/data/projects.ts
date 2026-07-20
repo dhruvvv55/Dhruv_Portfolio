@@ -1,11 +1,9 @@
 /* ─────────────────────────────────────────────────────────────
    Central project data.
-   Resume claims preserved verbatim. Workflows, system overviews,
-   and screenshots sourced from the three uploaded capstone
-   reports (MLCS, DLCS, QuantumShop BE Final).
+   Source of truth: latest resume (detection engineering focus).
    ───────────────────────────────────────────────────────────── */
 
-import { ShieldCheck, Cpu, Activity, Brain, Flag } from "lucide-react";
+import { Radar, Cloud, Bot, ShieldCheck, Cpu } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 export type ProjectStep = {
@@ -34,237 +32,232 @@ export type Project = {
 
 export const PROJECTS: Project[] = [
   {
-    slug: "llm-agent-security",
-    title: "Security of LLM-Powered AI Agents",
-    category: "AI / SECURITY RESEARCH",
-    icon: Brain,
-    status: "Active",
-    headline: "Independent research into prompt injection and data exfiltration risks in LLM agents.",
+    slug: "soc-detection-lab",
+    title: "SOC Detection Engineering Lab",
+    category: "DETECTION ENGINEERING",
+    icon: Radar,
+    status: "Complete",
+    headline:
+      "End-to-end SOC lab: 5 attack scenarios, 15+ detection signals, Wazuh + Splunk with automated IOC enrichment.",
     description:
-      "Currently conducting independent security research on vulnerabilities in LLM-powered AI agents, focusing on prompt injection, multi-turn manipulation, and data exfiltration risks, with the goal of contributing toward a publication.",
-    tech: ["Python", "LLMs", "Threat Modeling", "OWASP LLM Top 10"],
+      "Built a home SOC lab simulating 5 attack scenarios against Windows 11 + Wazuh SIEM. Developed 15+ high-fidelity detection signals mapped to 8 MITRE ATT&CK techniques and automated alert triage with VirusTotal enrichment.",
+    tech: ["Wazuh", "Sysmon", "Splunk", "Python", "MITRE ATT&CK", "VirusTotal API"],
+    github: "https://github.com/dhruvvv55/soc-home-lab",
     featured: true,
     metrics: [
-      { value: "2025", label: "Ongoing" },
-      { value: "Publication", label: "Goal" },
-      { value: "3", label: "Attack vectors studied" },
+      { value: "15+", label: "Detection signals" },
+      { value: "8", label: "MITRE ATT&CK techniques" },
+      { value: "500+", label: "Alerts forwarded to Splunk" },
     ],
     fullDescription:
-      "Independent security research investigating how LLM-powered AI agents can be compromised. The work focuses on three vectors: direct prompt injection, multi-turn manipulation that bypasses single-turn safety filters, and indirect data exfiltration through tool use and external content.",
+      "A production-grade SOC home lab that simulates realistic attacker behavior against a Windows 11 endpoint monitored by Wazuh SIEM. Covers credential access, defense evasion, persistence, and execution across 8 MITRE ATT&CK techniques. Includes an automated triage pipeline that enriches alerts with VirusTotal IOC lookups and forwards them to Splunk via HTTP Event Collector for SPL-based hunting queries.",
     systemOverview:
-      "Research framework that taxonomizes attack vectors, reproduces published exploits in controlled environments, and evaluates mitigations against standard agent architectures.",
+      "Windows 11 endpoint with Sysmon → Wazuh agent → Wazuh manager (detection rules + SCA) → alert triage pipeline (Python + VirusTotal enrichment) → Splunk HEC → SPL detection queries for hunting and dashboarding.",
     workflow: [
       {
-        title: "Literature review",
-        body: "Synthesized current threat landscape across NIST AI RMF, OWASP LLM Top 10, and recent academic literature on adversarial inputs to LLMs.",
+        title: "Lab build-out",
+        body: "Provisioned isolated Windows 11 endpoint and Wazuh manager, deployed Sysmon with a custom config, and instrumented full endpoint telemetry.",
       },
       {
-        title: "Attack reproduction",
-        body: "Reproduced prompt injection, multi-turn manipulation, and data exfiltration scenarios against agent architectures in a sandboxed environment.",
+        title: "Attack simulation",
+        body: "Simulated 5 realistic attack scenarios covering credential dumping, defense evasion, persistence mechanisms, and living-off-the-land execution.",
       },
       {
-        title: "Mitigation analysis",
-        body: "Evaluated effectiveness of input filtering, output validation, and tool-use constraints against each attack class.",
+        title: "Detection engineering",
+        body: "Authored 15+ high-fidelity Wazuh detection rules and mapped each to specific MITRE ATT&CK techniques (T1003, T1055, T1547, T1059 and more).",
       },
       {
-        title: "Publication draft",
-        body: "Writing up findings with the goal of contributing toward a peer-reviewed publication.",
+        title: "Automated enrichment",
+        body: "Built a Python pipeline that pulls alerts from Wazuh, queries VirusTotal for IOC context, and enriches events with reputation and category data.",
+      },
+      {
+        title: "Splunk integration",
+        body: "Forwarded 500+ enriched alerts to Splunk via HEC and wrote SPL detection queries + dashboards for threat hunting and metrics.",
+      },
+    ],
+  },
+  {
+    slug: "cloud-threat-detection-lab",
+    title: "Cloud Threat Detection Lab (GCP)",
+    category: "CLOUD SECURITY",
+    icon: Cloud,
+    status: "Complete",
+    headline:
+      "Detected GCP IAM privilege escalation via Cloud Audit Logs, mapped to MITRE ATT&CK, with scheduled alerting.",
+    description:
+      "Simulated an IAM privilege escalation attack on GCP (roles/viewer → roles/owner via SetIamPolicy), then built a Python detection pipeline analyzing 32+ audit events and mapped the detections to MITRE ATT&CK T1078.004.",
+    tech: ["GCP Cloud Audit Logs", "GCP IAM", "Splunk", "Python", "MITRE ATT&CK"],
+    github: "https://github.com/dhruvvv55/cloud-threat-detection-lab",
+    featured: true,
+    metrics: [
+      { value: "32+", label: "Audit events analyzed" },
+      { value: "T1078.004", label: "MITRE ATT&CK mapping" },
+      { value: "Auto", label: "Scheduled alerting" },
+    ],
+    fullDescription:
+      "A cloud-native threat detection project that simulates one of the most damaging attack patterns in cloud environments: IAM privilege escalation. The lab escalates a service account from roles/viewer to roles/owner using SetIamPolicy, then detects the escalation from Cloud Audit Logs. Every detection is mapped to MITRE ATT&CK T1078.004 (Valid Accounts: Cloud Accounts) and shipped through a scheduled alerting pipeline.",
+    systemOverview:
+      "GCP project with test IAM roles → controlled SetIamPolicy escalation from roles/viewer to roles/owner → Cloud Audit Logs (Admin Activity) → Python detection pipeline (parses 32+ event types, matches escalation patterns) → scheduled alerts + Splunk sink for retention and hunting.",
+    workflow: [
+      {
+        title: "Attack simulation",
+        body: "Provisioned a controlled GCP project and executed a realistic IAM privilege escalation: roles/viewer service account elevated to roles/owner via SetIamPolicy.",
+      },
+      {
+        title: "Log collection",
+        body: "Enabled Cloud Audit Logs (Admin Activity + Data Access) and streamed events to a central sink for parsing.",
+      },
+      {
+        title: "Detection pipeline",
+        body: "Built a Python pipeline that parses 32+ audit event types, identifies escalation patterns, and emits structured detections with full context.",
+      },
+      {
+        title: "ATT&CK mapping",
+        body: "Mapped every detection to MITRE ATT&CK T1078.004 (Valid Accounts: Cloud Accounts) for cross-tool correlation.",
+      },
+      {
+        title: "Scheduled alerting",
+        body: "Configured recurring detection runs and automated alerting to reduce manual triage toil and give the SOC a real-time signal on IAM abuse.",
+      },
+    ],
+  },
+  {
+    slug: "agent-injection-lab",
+    title: "LLM Agent Security: Indirect Prompt Injection Lab",
+    category: "AI / LLM SECURITY",
+    icon: Bot,
+    status: "Active",
+    headline:
+      "5 indirect prompt injection attacks × 5 defensive mitigations against a tool-using LLM agent, with an eval harness and live UI.",
+    description:
+      "Built a red-team + defense lab targeting Anthropic's tool-use loop. Implemented 5 indirect prompt injection attack classes, developed 5 defensive mitigations, and shipped an eval harness that benchmarks every attack × defense combination.",
+    tech: ["Python", "Anthropic API", "React", "SSE Streaming", "OWASP LLM Top 10"],
+    github: "https://github.com/dhruvvv55/agent-injection-lab",
+    featured: true,
+    metrics: [
+      { value: "5×5", label: "Attack × defense matrix" },
+      { value: "Live", label: "Real-time SSE UI" },
+      { value: "Eval", label: "Automated harness" },
+    ],
+    fullDescription:
+      "A hands-on security lab focused on the newest attack surface in AI systems: indirect prompt injection against LLM agents that use tools. The lab implements 5 attack classes (data exfiltration, tool-call hijacking, memory poisoning, output steering, and instruction override) against Anthropic's tool-use loop, then evaluates 5 defensive mitigations (input filtering, output validation, tool-call constraints, execution sandboxing, and rewrite-guard) across every combination. The frontend streams live detection signals via SSE so you can watch attacks succeed or get blocked in real time — the same pattern used in agentic detection engineering workflows.",
+    systemOverview:
+      "React frontend with real-time SSE streaming → Anthropic API tool-use loop under test → attack injection harness (5 classes) → defense middleware layer (5 mitigations) → eval harness scoring every attack × defense pair → live UI showing which attacks succeed, which get caught, and why.",
+    workflow: [
+      {
+        title: "Threat modeling",
+        body: "Mapped the attack surface of LLM agents using tools, drawing from OWASP LLM Top 10 (LLM01, LLM06) and MITRE ATLAS to identify indirect injection vectors.",
+      },
+      {
+        title: "Attack implementation",
+        body: "Built 5 concrete attack classes: data exfiltration via tool output, tool-call hijacking through hidden instructions, memory poisoning across turns, output steering, and instruction override.",
+      },
+      {
+        title: "Defensive mitigations",
+        body: "Implemented 5 layered defenses: input filtering, output validation, tool-call constraints, execution sandboxing, and a rewrite-guard that neutralizes suspicious content before it reaches the agent.",
+      },
+      {
+        title: "Eval harness",
+        body: "Benchmarked every attack × defense combination (25 pairs) with automated scoring for success rate, false positives, and detection latency.",
+      },
+      {
+        title: "Live UI",
+        body: "Built a React frontend that streams the agent's reasoning and defense triggers via SSE, giving a real-time view directly applicable to agentic detection engineering.",
       },
     ],
   },
   {
     slug: "quantumshop",
-    title: "Quantum-Secured Online Payment System",
+    title: "Quantum-Secured Payment System",
     category: "CRYPTOGRAPHY / FINTECH",
     icon: ShieldCheck,
     status: "Complete",
-    headline: "Full-stack payments app combining BB84 quantum keys, ML fraud detection, and blockchain logging.",
+    headline:
+      "Full-stack payment platform with BB84 quantum key distribution, AES-256-GCM encryption, and OTP-verified checkout.",
     description:
-      "Achieved 90%+ simulated reduction in key-interception risk by designing a QKD-inspired encrypted payment API, demonstrating expertise in data protection and secure application architecture.",
-    tech: ["React.js", "FastAPI", "Python", "Qiskit (BB84)", "Solidity", "MongoDB", "XGBoost"],
+      "Built a full-stack payment platform implementing BB84 quantum key distribution with eavesdropper detection, AES-256-GCM transaction encryption, card tokenization, and OTP-verified checkout across card, UPI, and net banking flows.",
+    tech: ["Python", "FastAPI", "React", "MongoDB", "Docker", "Qiskit"],
     github:
       "https://github.com/dhruvvv55/Advancing-Security-in-Digital-Transactions-Using-Quantum-Cryptography",
     paperLink: "https://jisem-journal.com/index.php/journal/article/view/9214/4252",
-    featured: true,
     metrics: [
-      { value: "90%+", label: "Key-interception risk reduction" },
-      { value: "<3%", label: "QBER on BB84 simulation" },
-      { value: "~92%", label: "Fraud detection accuracy" },
+      { value: "BB84", label: "Quantum key distribution" },
+      { value: "AES-256-GCM", label: "Transaction encryption" },
+      { value: "3", label: "Payment flows (Card/UPI/NetBanking)" },
     ],
     fullDescription:
-      "Full-stack payment system that integrates three security layers: a BB84 quantum key distribution simulator built with Qiskit, an AI-based fraud detection engine using XGBoost, and a Solidity smart contract on a private Ethereum chain for immutable transaction logging. The React frontend supports Card, UPI, Net Banking, and Wallet flows with OTP verification, while a FastAPI backend orchestrates encryption, fraud scoring, and blockchain writes.",
+      "A production-shaped fintech platform that puts quantum-safe cryptography into a real checkout flow. Implements the BB84 QKD protocol (with eavesdropper detection through basis reconciliation and error rate estimation), uses the generated key for AES-256-GCM transaction encryption, tokenizes card data, and enforces OTP-verified checkout across three payment flows. Published as peer-reviewed research in JISEM.",
     systemOverview:
-      "Layered architecture: React UI → FastAPI orchestrator → three parallel security services (Qiskit-based BB84 quantum key generator, XGBoost fraud scorer, Solidity smart contract on Ganache). Transactions move through encryption → fraud check → blockchain logging → confirmation, with MongoDB persisting transaction metadata and keys.",
+      "React frontend (card/UPI/net-banking checkout with OTP) → FastAPI backend → BB84 QKD engine (Qiskit-based key exchange with eavesdropper detection) → AES-256-GCM transaction encryption using the quantum-derived key → card tokenization service → MongoDB for encrypted transaction storage → Docker-orchestrated deployment.",
     workflow: [
       {
-        title: "User interface (React.js)",
-        body: "Built a payments frontend supporting Card, UPI, Net Banking, and Wallet flows with OTP entry, MetaMask integration, and real-time transaction feedback.",
+        title: "Checkout & OTP flow",
+        body: "React frontend handles card, UPI, and net banking selection with OTP verification before any encryption or transaction touches the wire.",
       },
       {
-        title: "FastAPI backend orchestration",
-        body: "Backend coordinates all three security services, handles SSL-encrypted requests, performs AES-GCM encryption using quantum-generated keys, and returns success/failure responses. Average response time under 0.8 seconds.",
+        title: "BB84 key distribution",
+        body: "FastAPI backend runs the BB84 protocol: photon polarization encoding, basis reconciliation, error rate estimation, and eavesdropper detection.",
       },
       {
-        title: "Quantum key distribution (BB84)",
-        body: "Implemented the BB84 protocol simulation in Qiskit — photon polarization, random basis selection, key sifting, and error estimation. Average QBER under 3%, well within the threshold for secure communication.",
+        title: "AES-256-GCM encryption",
+        body: "The quantum-derived key is used to encrypt the full transaction payload with AES-256-GCM, providing authenticated encryption over the wire.",
       },
       {
-        title: "AI fraud detection (XGBoost)",
-        body: "Trained ML classifiers (Logistic Regression, Random Forest, XGBoost) on synthetic transaction data using features like amount, location, device info, and frequency. XGBoost reached ~92% accuracy with 94% precision and 89% recall.",
-      },
-      {
-        title: "Blockchain logging (Solidity + Ganache)",
-        body: "Smart contracts written in Solidity, compiled with Hardhat, deployed locally on Ganache. Each verified transaction logs amount, fraud score, and timestamp immutably. MetaMask used for signing and approval.",
+        title: "Card tokenization",
+        body: "Sensitive card data is never stored raw — replaced with tokens issued by the tokenization service and mapped to the encrypted MongoDB record.",
       },
       {
         title: "Publication",
-        body: "Published findings in the Journal of Information Systems Engineering and Management (JISEM), April 2025.",
+        body: "Full protocol design and results published in JISEM (Apr 2025), including QBER measurements and eavesdropper-detection accuracy.",
       },
     ],
-    screenshots: [],
   },
   {
     slug: "malware-detection",
-    title: "Malware Detection Using Deep Learning",
-    category: "ML / SECURITY",
+    title: "Malware Detection Using CNN-LSTM",
+    category: "APPLIED ML / SECURITY",
     icon: Cpu,
     status: "Complete",
-    headline: "Hybrid CNN-LSTM model classifying PE-file malware across 25 families.",
+    headline:
+      "94.06% accuracy on imbalanced Windows PE dataset with hybrid CNN-LSTM, SMOTE, and explainability via saliency maps.",
     description:
-      "Achieved 98.74% malware detection accuracy by engineering a hybrid CNN-LSTM model, applying adversarial ML techniques to identify threats that evade traditional signature-based detection.",
-    tech: ["Python", "TensorFlow", "Keras", "CNN", "LSTM", "MobileNet", "SMOTE"],
+      "Achieved 94.06% accuracy on an imbalanced Windows PE dataset using a hybrid CNN-LSTM model with SMOTE class balancing and Keras Tuner hyperparameter search. Deployed as a Flask app with a confidence threshold slider and saliency map explainability.",
+    tech: ["Python", "TensorFlow", "Keras", "Flask", "SMOTE", "Keras Tuner"],
     github: "https://github.com/dhruvvv55/Malware-Detection-using-CNN-LSTM",
     paperLink: "https://irjet.net/archives/V11/i11/IRJET-V11I1103.pdf",
-    featured: true,
     metrics: [
-      { value: "98.74%", label: "MobileNet accuracy" },
-      { value: "25", label: "Malware families" },
-      { value: "51,959", label: "PE samples processed" },
+      { value: "94.06%", label: "Accuracy on imbalanced PE dataset" },
+      { value: "CNN-LSTM", label: "Hybrid architecture" },
+      { value: "Flask", label: "Deployed app + saliency maps" },
     ],
     fullDescription:
-      "Hybrid CNN-LSTM malware detection system that converts Portable Executable (PE) files into 32×32 grayscale images, applies CNN layers for spatial feature extraction, then feeds them through LSTM layers to capture sequential patterns. SMOTE applied to handle class imbalance (2,583 benign vs 49,376 malware). Six architectures benchmarked (CNN, VGG16, VGG19, ResNet50, Xception, MobileNet); MobileNet achieved the highest accuracy at 98.74% with loss 0.0386. The published IRJET paper covers the full architecture comparison; the capstone implementation extended the work with a hybrid CNN-LSTM model and a web app for binary classification.",
+      "A hybrid deep learning model that converts Windows PE files into 32×32 grayscale images and classifies them as malware or benign. Uses CNN layers for spatial feature extraction, LSTM layers for sequential patterns, SMOTE for class balancing on the heavily imbalanced dataset, and Keras Tuner for hyperparameter search. Ships as a Flask web app with a live confidence-threshold slider and saliency map overlays so the model's decisions are explainable, not black-box. Published in IRJET, Oct 2024.",
     systemOverview:
-      "PE file → grayscale image (32×32) → MinMax normalization → SMOTE for class balance → CNN feature extraction (Conv2D + MaxPooling × 3) → reshape → LSTM(128) → Dense(128) → Dropout(0.5) → sigmoid classifier. Adam optimizer, binary cross-entropy loss, hyperparameter search via Keras Tuner RandomSearch.",
+      "PE file → 32×32 grayscale image → MinMax normalization → SMOTE class balancing → CNN feature extraction (Conv2D + MaxPooling × 3) → reshape → LSTM(128) → Dense + Dropout → sigmoid classifier. Keras Tuner RandomSearch for hyperparameter selection. Deployed as Flask app with interactive threshold and saliency maps.",
     workflow: [
       {
-        title: "Dataset preparation",
-        body: "Used the Raw PE as Image dataset (51,959 samples — 49,376 malware, 2,583 benign) where each PE file is flattened into a 32×32 grayscale image. Benchmarked against the Malimg dataset (9,339 images across 25 malware families).",
+        title: "Dataset & preprocessing",
+        body: "Windows PE files converted to 32×32 grayscale images, pixel values MinMax-normalized. Heavy class imbalance addressed with SMOTE synthetic oversampling.",
       },
       {
-        title: "Preprocessing & class balancing",
-        body: "Normalized pixel values with MinMaxScaler and applied SMOTE (synthetic minority over-sampling) to balance the heavily skewed class distribution. Final balanced set: 49,376 malware + 46,907 synthetic benign samples.",
+        title: "Hybrid CNN-LSTM model",
+        body: "Sequential architecture: Conv2D + MaxPooling × 3 for spatial features, reshape, LSTM(128, tanh) for sequential patterns, Dense(128) + Dropout(0.5), sigmoid output.",
       },
       {
-        title: "Six-architecture benchmark",
-        body: "Benchmarked CNN, VGG16, VGG19, ResNet50, Xception, and MobileNet on the Malimg dataset. MobileNet achieved the highest accuracy at 98.74% with the lowest loss (0.0386), outperforming all five other architectures.",
-      },
-      {
-        title: "CNN-LSTM hybrid",
-        body: "Built a Sequential model: Conv2D + MaxPooling × 3 for spatial features, Reshape, LSTM(128, tanh) for sequential patterns, Dense(128) + Dropout(0.5), sigmoid output. Hyperparameters tuned via Keras Tuner RandomSearch.",
+        title: "Hyperparameter search",
+        body: "Keras Tuner RandomSearch across filter counts, LSTM units, dropout, and learning rate to find the best-performing configuration.",
       },
       {
         title: "Training & evaluation",
-        body: "Trained with Adam optimizer, binary cross-entropy loss, data augmentation (rotation, zoom, horizontal flip), and class weights. Used ModelCheckpoint to save the best validation accuracy model.",
+        body: "Trained with Adam optimizer, binary cross-entropy loss, and data augmentation. Achieved 94.06% accuracy on the held-out imbalanced test set.",
       },
       {
-        title: "Web app deployment",
-        body: "Built a binary classification web app — user uploads a PE image, model returns Prediction: Malware or Benign with confidence probability.",
-      },
-      {
-        title: "Publication",
-        body: "Published in the International Research Journal of Engineering and Technology (IRJET), October 2024.",
-      },
-    ],
-    screenshots: [
-      { src: "/projects/malware-workflow.png", caption: "CNN-LSTM hybrid model architecture flowchart" },
-      { src: "/projects/malware-curves.png", caption: "Training accuracy and loss curves across 10 epochs" },
-      { src: "/projects/malware-confusion.png", caption: "Confusion matrix and classification report on the test set" },
-      { src: "/projects/malware-app.png", caption: "Web app: binary classification with prediction probability" },
-    ],
-  },
-  {
-    slug: "predictive-maintenance",
-    title: "Predictive Maintenance Using Machine Learning",
-    category: "ML / RELIABILITY",
-    icon: Activity,
-    status: "Complete",
-    headline: "Streamlit app predicting industrial equipment failures from sensor inputs.",
-    description:
-      "Achieved 98.5% accurate failure prediction by training supervised ML models on sensor data, demonstrating strong CS fundamentals and applied problem-solving skills.",
-    tech: ["Python", "Scikit-learn", "Pandas", "Streamlit", "Random Forest", "Decision Tree"],
-    github:
-      "https://github.com/dhruvvv55/Predictive-Maintenance-of-Industrial-Equipment-using-ML-",
-    paperLink: "https://ijarsct.co.in/Paper19379.pdf",
-    metrics: [
-      { value: "98.52%", label: "Random Forest accuracy" },
-      { value: "6", label: "Sensor input features" },
-      { value: "IJARSCT", label: "Published Aug 2024" },
-    ],
-    fullDescription:
-      "Streamlit web app that predicts industrial machine failures from six real-time sensor inputs: machine type (Low/Medium/High), air temperature [K], process temperature [K], rotational speed [rpm], torque [Nm], and tool wear [min]. The trained Random Forest classifier reaches 98.52% accuracy on the test set, with Decision Tree achieving 97.52% as the baseline.",
-    systemOverview:
-      "Streamlit frontend collects six sensor readings → joblib-loaded Random Forest model → binary failure prediction with confidence. Backend pipeline: pandas dataframe → statistical analysis → preprocessing → model training (Decision Tree, Random Forest, SVM, Logistic Regression benchmarked) → joblib serialization → app.py deployment.",
-    workflow: [
-      {
-        title: "Data ingestion",
-        body: "Loaded predictive_maintenance.csv into a Pandas DataFrame with proper exception handling. Source dataset contains industrial sensor readings labeled with failure outcomes.",
-      },
-      {
-        title: "Statistical analysis & preprocessing",
-        body: "Performed exploratory analysis (histograms, box plots, scatter plot matrix) to understand feature distributions, then handled missing values, outliers, and feature scaling.",
-      },
-      {
-        title: "Model benchmarking",
-        body: "Trained and compared four ML algorithms: Decision Tree (97.52% accuracy), Random Forest (98.52% accuracy), Support Vector Machine, and Logistic Regression. Random Forest selected as best performer.",
-      },
-      {
-        title: "Streamlit app deployment",
-        body: "Built a Streamlit interface (app.py) with six input fields — machine type, air/process temperature, rotational speed, torque, tool wear — and a 'Predict Failure' button. Loads the serialized Random Forest model via joblib for real-time predictions.",
+        title: "Explainable Flask app",
+        body: "Deployed as a Flask web app with a confidence-threshold slider and saliency map overlays so users can see which regions of the PE image drove each classification.",
       },
       {
         title: "Publication",
-        body: "Published in the International Journal of Advanced Research in Science, Communication and Technology (IJARSCT), August 2024.",
-      },
-    ],
-    screenshots: [
-      { src: "/projects/predictive-workflow.png", caption: "End-to-end project workflow: data ingestion through deployment" },
-      { src: "/projects/predictive-app.png", caption: "Streamlit web app: sensor inputs and failure prediction output" },
-    ],
-  },
-  {
-    slug: "tryhackme-labs",
-    title: "TryHackMe Capture the Flag Challenges",
-    category: "OFFENSIVE SECURITY",
-    icon: Flag,
-    status: "Active",
-    headline: "50+ hands-on security labs across the full attack surface.",
-    description:
-      "Completed 50+ labs covering vulnerability assessment, intrusion detection, digital forensics, mobile security, and exploit fundamentals, reinforcing practical security engineering skills.",
-    tech: ["Hands-on Security Labs", "CTF"],
-    metrics: [
-      { value: "50+", label: "Labs completed" },
-      { value: "5", label: "Domains covered" },
-    ],
-    fullDescription:
-      "Completed 50+ labs covering vulnerability assessment, intrusion detection, digital forensics, mobile security, and exploit fundamentals, reinforcing practical security engineering skills.",
-    systemOverview:
-      "Ongoing hands-on practice across TryHackMe rooms spanning five major domains of practical security work.",
-    workflow: [
-      {
-        title: "Vulnerability assessment",
-        body: "Labs focused on identifying, scanning, and prioritizing vulnerabilities across realistic infrastructure.",
-      },
-      {
-        title: "Intrusion detection",
-        body: "Hands-on work with detection signatures, log analysis, and identifying compromise indicators.",
-      },
-      {
-        title: "Digital forensics",
-        body: "Recovered artifacts, analyzed disk and memory images, and reconstructed incident timelines.",
-      },
-      {
-        title: "Mobile & exploit fundamentals",
-        body: "Practical work on mobile attack surfaces and core exploitation techniques.",
+        body: "Full architecture comparison and results published in IRJET (Oct 2024).",
       },
     ],
   },

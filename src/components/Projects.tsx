@@ -3,17 +3,10 @@ import { ArrowUpRight } from "lucide-react";
 import { SectionHeader } from "./SectionHeader";
 import { PROJECTS } from "@/data/projects";
 import { projectVisuals } from "./ProjectVisuals";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 export const Projects = () => {
-  const { ref, visible } = useScrollReveal();
-
   return (
-    <section
-      ref={ref as React.RefObject<HTMLElement>}
-      id="projects"
-      className={`reveal ${visible ? "is-visible" : ""} py-24 md:py-32 border-t border-border`}
-    >
+    <section id="projects" className="py-24 md:py-32 border-t border-border">
       <div className="container mx-auto px-6 max-w-6xl">
         <SectionHeader
           number="05"

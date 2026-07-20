@@ -1,6 +1,5 @@
 import { SectionHeader } from "./SectionHeader";
-import { MapPin } from "lucide-react";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { MapPin, GraduationCap } from "lucide-react";
 
 const education = [
   {
@@ -10,17 +9,16 @@ const education = [
     metric: "GPA 3.7 / 4.0",
     school: "University of Southern California",
     degree: "M.S. in Cybersecurity Engineering",
-    description: "Graduate study in computer forensics, security and privacy, malware analysis and reverse engineering, and information security foundations and policy.",
+    description: "Graduate study in computer forensics, security and privacy, malware analysis and reverse engineering, computer system assurance, and security systems.",
     coursework: [
-      "Foundations and Policy for Information Security",
-      "Computer Forensics",
-      "Security and Privacy",
-      "Malware Analysis and Reverse Engineering",
-      "Security Systems",
-      "Computer Systems Assurance",
+      "Computer Forensics (DSCI 528)",
+      "Malware Analysis & Reverse Engineering (TAC 443)",
+      "Security & Privacy (DSCI 529)",
+      "Computer System Assurance (DSCI 523)",
+      "Security Systems (CSCI 530)",
     ],
     logo: "/logos/usc.webp",
-    logoBg: "#990000",
+    logoBg: "#990000", // USC cardinal red — seal sits on its native brand color
   },
   {
     n: "02",
@@ -31,28 +29,21 @@ const education = [
     degree: "B.E. in Computer Science & Engineering (Cybersecurity)",
     description: "Specialization in cybersecurity with focus on information security fundamentals, digital forensics, ethical hacking, and applied machine learning for security.",
     coursework: [
-      "Fundamentals of Information Security",
       "Digital Forensics",
+      "Fundamentals of Information Security",
       "Cybersecurity Risk Management",
       "Information Security Compliance",
       "Ethical Hacking & Cybersecurity",
       "ML for Cybersecurity",
-      "DL for Cybersecurity",
     ],
     logo: "/logos/tcet.jpeg",
-    logoBg: "#FFFFFF",
+    logoBg: "#FFFFFF", // White — matches TCET's native background
   },
 ];
 
 export const Education = () => {
-  const { ref, visible } = useScrollReveal();
-
   return (
-    <section
-      ref={ref as React.RefObject<HTMLElement>}
-      id="education"
-      className={`reveal ${visible ? "is-visible" : ""} py-24 md:py-32 border-t border-border`}
-    >
+    <section id="education" className="py-24 md:py-32 border-t border-border">
       <div className="container mx-auto px-6 max-w-6xl">
         <SectionHeader
           number="02"
@@ -89,6 +80,7 @@ export const Education = () => {
                         alt={`${edu.school} logo`}
                         className="w-full h-full object-cover"
                         onError={(e) => {
+                          // Fallback to icon if logo file missing
                           e.currentTarget.style.display = "none";
                           const parent = e.currentTarget.parentElement;
                           if (parent && !parent.querySelector(".fallback-icon")) {
