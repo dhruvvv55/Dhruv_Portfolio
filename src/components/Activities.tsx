@@ -3,7 +3,7 @@ import { Trophy, Shield, Code2, Star } from "lucide-react";
 
 export const Activities = () => {
   return (
-    <section id="activities" className="py-24 md:py-32 border-t border-border">
+    <section id="activities" className="scroll-mt-24 py-24 md:py-32 border-t border-border">
       <div className="container mx-auto px-6 max-w-6xl">
         <SectionHeader
           number="07"
@@ -25,7 +25,7 @@ export const Activities = () => {
                   <span className="text-[10px] font-mono uppercase tracking-wider text-primary">Featured · 1st Place</span>
                 </div>
                 <h3 className="text-2xl md:text-3xl font-medium mb-3">
-                  WordHack Competition <span className="font-serif italic text-primary">— First Place</span>
+                  WordHack Competition <span className="font-serif italic text-primary">First Place</span>
                 </h3>
                 <p className="text-foreground/75 leading-relaxed mb-4">
                   Took first place in the WordHack competition organized by the CyberPeace Foundation, a cybersecurity-focused contest.

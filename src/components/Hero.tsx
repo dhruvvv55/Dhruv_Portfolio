@@ -125,7 +125,7 @@ export const Hero = () => {
       {/* CONTENT */}
       <div className="container mx-auto px-6 max-w-7xl relative z-10">
         {/* Top status row — casual */}
-        <div className="flex items-center gap-3 mb-10 animate-fade-up">
+        <div className="flex items-center justify-center gap-3 mb-10 animate-fade-up">
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-primary" />
@@ -139,72 +139,57 @@ export const Hero = () => {
           </span>
         </div>
 
-        {/* NAME row — text only, photo lives in About now */}
-        <div className="mb-6">
+        {/* NAME — centered, one line, same size, same style */}
+        <div className="text-center mb-6">
           {/* small kicker */}
           <p
-            className="font-mono text-xs uppercase tracking-[0.3em] text-primary mb-3 animate-fade-up flex items-center gap-2"
+            className="font-mono text-xs uppercase tracking-[0.3em] text-primary mb-4 animate-fade-up flex items-center justify-center gap-2"
             style={{ animationDelay: "0.08s" }}
           >
             hey there <span className="inline-block animate-wave origin-bottom-right">👋</span> the name's
           </p>
 
-          {/* Dhruv Ashok */}
+          {/* Full name — one line, same font */}
           <h1
-            className="font-serif font-medium leading-[0.84] tracking-tight animate-fade-up select-none"
-            style={{ fontSize: "clamp(3rem, 8vw, 8rem)", animationDelay: "0.1s" }}
+            className="font-serif font-medium leading-[0.9] tracking-tight animate-fade-up select-none"
+            style={{ fontSize: "clamp(2.5rem, 7.5vw, 7.5rem)", animationDelay: "0.1s" }}
           >
-            {"Dhruv Ashok".split("").map((ch, i) => (
+            {"Dhruv Ashok Patel".split("").map((ch, i) => (
               <span
                 key={i}
                 className={`inline-block transition-all duration-300 hover:text-primary hover:-translate-y-2 hover:scale-110 cursor-default ${
-                  ch === " " ? "w-[0.25em]" : ""
+                  ch === " " ? "w-[0.3em]" : ""
                 }`}
-                style={{ transitionDelay: `${i * 16}ms` }}
+                style={{ transitionDelay: `${i * 14}ms` }}
               >
                 {ch === " " ? "\u00A0" : ch}
               </span>
             ))}
-          </h1>
-
-          {/* Patel */}
-          <h1
-            className="font-serif italic font-medium leading-[0.84] tracking-tight animate-fade-up select-none flex items-baseline gap-2 md:gap-4 flex-wrap"
-            style={{ fontSize: "clamp(4rem, 11.5vw, 11.5rem)", animationDelay: "0.16s" }}
-          >
-            {"Patel".split("").map((ch, i) => (
-              <span
-                key={i}
-                className="inline-block transition-all duration-300 hover:text-primary hover:-translate-y-2 hover:scale-110 cursor-default"
-                style={{ transitionDelay: `${i * 20}ms` }}
-              >
-                {ch}
-              </span>
-            ))}
-            <span className="inline-block text-primary not-italic" style={{ fontSize: "0.2em" }}>
+            <span className="inline-block text-primary ml-2 md:ml-4" style={{ fontSize: "0.35em", verticalAlign: "middle" }}>
               <Sparkles className="w-[1em] h-[1em] inline animate-pulse" />
             </span>
           </h1>
         </div>
 
-        {/* Tagline — where the photo used to sit */}
+        {/* Tagline centered */}
         <div
-          className="flex items-center gap-4 mb-8 animate-fade-up"
+          className="flex items-center justify-center gap-4 mb-8 animate-fade-up"
           style={{ animationDelay: "0.22s" }}
         >
           <span className="h-px bg-primary/50 w-8 md:w-16 flex-shrink-0" />
-          <p className="font-serif italic text-xl md:text-2xl text-foreground/90 leading-snug">
+          <p className="font-serif italic text-xl md:text-2xl text-foreground/90 leading-snug text-center">
             Building signals that catch what <span className="text-primary">signatures can't.</span>
           </p>
+          <span className="h-px bg-primary/50 w-8 md:w-16 flex-shrink-0" />
         </div>
 
         {/* Subtitle — playful, with rotating role */}
         <div
-          className="flex items-baseline flex-wrap gap-x-3 gap-y-1 mb-5 animate-fade-up"
+          className="flex items-baseline flex-wrap justify-center gap-x-3 gap-y-1 mb-5 animate-fade-up"
           style={{ animationDelay: "0.2s" }}
         >
           <span className="text-xl md:text-2xl text-foreground/80">a</span>
-          <span className="relative inline-block min-w-[280px] md:min-w-[420px]">
+          <span className="relative inline-block min-w-[280px] md:min-w-[420px] text-center">
             <span
               key={roleIndex}
               className="text-xl md:text-2xl font-serif italic text-primary inline-block animate-role-fade"
@@ -218,17 +203,18 @@ export const Hero = () => {
 
         {/* Real description */}
         <p
-          className="text-base md:text-lg text-foreground/65 max-w-2xl leading-relaxed mb-7 animate-fade-up"
+          className="text-base md:text-lg text-foreground/65 max-w-2xl mx-auto text-center leading-relaxed mb-7 animate-fade-up"
           style={{ animationDelay: "0.25s" }}
         >
           MS Cybersecurity Engineering at USC, focused on detection engineering, cloud
-          threat detection, and LLM agent security. Building SOC pipelines and agentic
-          detection workflows for a full-time team to ship secure things with.
+          threat detection, and LLM agent security. I build SOC pipelines and agentic
+          detection workflows, and I'm looking for a full-time team where I can help
+          ship secure software.
         </p>
 
-        {/* Action row — magnetic primary button */}
+        {/* Action row — centered */}
         <div
-          className="flex flex-wrap items-center gap-3 mb-10 animate-fade-up"
+          className="flex flex-wrap items-center justify-center gap-3 mb-10 animate-fade-up"
           style={{ animationDelay: "0.3s" }}
         >
           <button

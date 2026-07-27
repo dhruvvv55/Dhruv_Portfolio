@@ -6,7 +6,7 @@ import { projectVisuals } from "./ProjectVisuals";
 
 export const Projects = () => {
   return (
-    <section id="projects" className="py-24 md:py-32 border-t border-border">
+    <section id="projects" className="scroll-mt-24 py-24 md:py-32 border-t border-border">
       <div className="container mx-auto px-6 max-w-6xl">
         <SectionHeader
           number="05"

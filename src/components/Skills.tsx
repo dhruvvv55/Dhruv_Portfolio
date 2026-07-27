@@ -112,7 +112,7 @@ const SkillIcon = ({ skill }: { skill: Skill }) => {
 
 export const Skills = () => {
   return (
-    <section id="skills" className="reveal py-24 md:py-32 border-t border-border">
+    <section id="skills" className="scroll-mt-24 reveal py-24 md:py-32 border-t border-border">
       <div className="container mx-auto px-6 max-w-6xl">
         <SectionHeader
           number="04"

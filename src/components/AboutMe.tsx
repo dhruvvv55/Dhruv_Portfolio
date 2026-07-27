@@ -2,7 +2,7 @@ import profileImage from "@/assets/dhruv.jpg";
 
 export const AboutMe = () => {
   return (
-    <section id="about" className="relative py-24 md:py-36 border-t border-border">
+    <section id="about" className="relative scroll-mt-24 py-16 md:py-24 border-t border-border">
       <div className="container mx-auto px-6 max-w-6xl">
         {/* Section header — editorial style */}
         <div className="grid lg:grid-cols-[1fr,3fr] gap-8 mb-16 animate-fade-up">
@@ -95,62 +95,29 @@ export const AboutMe = () => {
                 I
               </span>
               <span>
-                'm a detection engineer with a security researcher's mindset. I build SOC
-                detection pipelines with Wazuh + Splunk, hunt IAM privilege escalation in
-                GCP audit logs, and red-team LLM agents with indirect prompt injection.
-                What I care about most is closing the gap between security research and a
-                real detection someone actually ships to production.
+                'm a detection engineer with a researcher's mindset. I like building SOC
+                pipelines with Wazuh and Splunk, hunting IAM privilege escalation in GCP
+                audit logs, and figuring out how LLM agents actually break when you push
+                on them.
               </span>
             </p>
 
-            {/* Pull quote breaking the body */}
-            <blockquote className="my-12 md:my-16 py-8 border-y border-border relative">
-              <span className="absolute -top-4 left-0 px-2 bg-background text-primary font-serif text-5xl leading-none">
-                "
-              </span>
-              <p className="font-serif italic text-2xl md:text-3xl leading-[1.3] text-foreground/90 max-w-3xl pl-2">
-                A detection that never fires isn't defense — it's paperwork. I care about signals that catch real attackers.
-              </p>
-              <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground pl-2">
-                — Working principle
-              </p>
-            </blockquote>
-
-            <p className="text-lg md:text-xl leading-[1.7] text-foreground/85 mb-8">
-              At <strong className="text-foreground font-medium">Crossover Technology</strong> I
-              embedded with the security operations team, monitoring{" "}
-              <span className="text-primary font-medium">50+ daily SIEM alerts</span><sup className="text-xs text-muted-foreground ml-0.5">¹</sup>,
-              classifying them by severity, and producing structured incident reports the SOC
-              could act on the same morning.
+            <p className="text-lg md:text-xl leading-[1.7] text-foreground/85 mt-8">
+              At <strong className="text-foreground font-medium">Crossover Technology</strong>{" "}
+              I sat with the security team and worked through{" "}
+              <span className="text-primary font-medium">50+ SIEM alerts a day</span>,
+              triaging by severity and writing up incident notes the SOC could act on the
+              same morning. Outside of that, I built a home SOC lab with 15+ detection
+              rules mapped to MITRE ATT&amp;CK, a GCP pipeline that catches IAM privilege
+              escalation, and a red-team lab that tests 25 attack and defense pairs against
+              LLM agents.
             </p>
 
-            <p className="text-lg md:text-xl leading-[1.7] text-foreground/85">
-              <strong className="text-foreground font-medium">Detection first</strong> is how I
-              work. I built a home SOC lab with 15+ detection signals mapped to MITRE ATT&amp;CK,
-              a GCP threat detection pipeline for IAM privilege escalation, and a red-team lab
-              with a{" "}
-              <strong className="text-foreground font-medium">5×5 attack × defense matrix</strong><sup className="text-xs text-muted-foreground ml-0.5">²</sup>{" "}
-              for LLM agents.{" "}
-              <strong className="text-foreground font-medium">Adversarial thinking</strong> is
-              what I bring to AI security research.{" "}
-              <strong className="text-foreground font-medium">Cross-stack fluency</strong> lets
-              me move from Python detection scripts to React SSE dashboards in the same sprint.
+            <p className="text-lg md:text-xl leading-[1.7] text-foreground/85 mt-8">
+              What I care about most is closing the gap between security research and a
+              detection that someone can actually ship to production. Right now I'm looking
+              for a full-time team where I can keep doing that.
             </p>
-
-            {/* Footnotes */}
-            <div className="mt-16 pt-6 border-t border-border space-y-2">
-              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground mb-3">
-                Footnotes
-              </p>
-              <p className="text-xs text-muted-foreground font-mono leading-relaxed">
-                <sup className="text-primary">¹</sup>{" "}
-                Crossover Technology Pvt. Ltd., Cybersecurity Intern, Mar–Jun 2025.
-              </p>
-              <p className="text-xs text-muted-foreground font-mono leading-relaxed">
-                <sup className="text-primary">²</sup>{" "}
-                5 attack classes × 5 defensive mitigations = 25 evaluated pairs. See <a href="#projects" className="text-primary hover:underline">§05 Projects</a>.
-              </p>
-            </div>
           </div>
 
           {/* RIGHT marginalia — what I'm into */}

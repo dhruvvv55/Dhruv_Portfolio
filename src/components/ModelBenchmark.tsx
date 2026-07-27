@@ -14,8 +14,8 @@ const architectures = [
   { name: "VGG16", description: "Deep transfer-learning architecture", featured: false },
   { name: "VGG19", description: "Deepest VGG variant", featured: false },
   { name: "ResNet50", description: "Residual connections", featured: false },
-  { name: "Xception", description: "Depthwise separable convolutions — runner-up", featured: true },
-  { name: "MobileNet", description: "Lightweight depthwise separable — winner", winner: true, featured: true },
+  { name: "Xception", description: "Depthwise separable convolutions (runner-up)", featured: true },
+  { name: "MobileNet", description: "Lightweight depthwise separable (winner)", winner: true, featured: true },
 ];
 
 export const ModelBenchmark = () => {
@@ -30,7 +30,7 @@ export const ModelBenchmark = () => {
           </div>
           <span className="hidden md:inline-flex items-center gap-1 text-xs text-muted-foreground font-mono whitespace-nowrap">
             <Info className="w-3 h-3" />
-            range 92.36% – 98.74%
+            range 92.36% to 98.74%
           </span>
         </div>
       </div>

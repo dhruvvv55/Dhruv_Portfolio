@@ -140,7 +140,7 @@ export const PROJECTS: Project[] = [
       { value: "Eval", label: "Automated harness" },
     ],
     fullDescription:
-      "A hands-on security lab focused on the newest attack surface in AI systems: indirect prompt injection against LLM agents that use tools. The lab implements 5 attack classes (data exfiltration, tool-call hijacking, memory poisoning, output steering, and instruction override) against Anthropic's tool-use loop, then evaluates 5 defensive mitigations (input filtering, output validation, tool-call constraints, execution sandboxing, and rewrite-guard) across every combination. The frontend streams live detection signals via SSE so you can watch attacks succeed or get blocked in real time — the same pattern used in agentic detection engineering workflows.",
+      "A hands-on security lab focused on the newest attack surface in AI systems: indirect prompt injection against LLM agents that use tools. The lab implements 5 attack classes (data exfiltration, tool-call hijacking, memory poisoning, output steering, and instruction override) against Anthropic's tool-use loop, then evaluates 5 defensive mitigations (input filtering, output validation, tool-call constraints, execution sandboxing, and rewrite-guard) across every combination. The frontend streams live detection signals via SSE so you can watch attacks succeed or get blocked in real time. Same pattern used in agentic detection engineering workflows.",
     systemOverview:
       "React frontend with real-time SSE streaming → Anthropic API tool-use loop under test → attack injection harness (5 classes) → defense middleware layer (5 mitigations) → eval harness scoring every attack × defense pair → live UI showing which attacks succeed, which get caught, and why.",
     workflow: [
@@ -204,7 +204,7 @@ export const PROJECTS: Project[] = [
       },
       {
         title: "Card tokenization",
-        body: "Sensitive card data is never stored raw — replaced with tokens issued by the tokenization service and mapped to the encrypted MongoDB record.",
+        body: "Sensitive card data is never stored raw, replaced with tokens issued by the tokenization service and mapped to the encrypted MongoDB record.",
       },
       {
         title: "Publication",

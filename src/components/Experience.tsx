@@ -20,7 +20,7 @@ const experience = [
 
 export const Experience = () => {
   return (
-    <section id="experience" className="reveal py-24 md:py-32 border-t border-border">
+    <section id="experience" className="scroll-mt-24 reveal py-24 md:py-32 border-t border-border">
       <div className="container mx-auto px-6 max-w-6xl">
         <SectionHeader
           number="03"
