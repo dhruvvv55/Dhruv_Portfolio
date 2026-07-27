@@ -1,5 +1,6 @@
 import { SectionHeader } from "./SectionHeader";
-import { Mail, Github, Linkedin, MapPin, Phone, ArrowUpRight } from "lucide-react";
+import { Mail, Github, Linkedin, MapPin, Phone, ArrowUpRight, Eye } from "lucide-react";
+import { useVisitCount } from "@/hooks/useVisitCount";
 
 const channels = [
   {
@@ -29,6 +30,7 @@ const channels = [
 ];
 
 export const Contact = () => {
+  const { count } = useVisitCount();
   return (
     <section id="contact" className="py-24 md:py-32 border-t border-border">
       <div className="container mx-auto px-6 max-w-6xl">
@@ -68,9 +70,20 @@ export const Contact = () => {
           })}
         </div>
 
-        <div className="mt-12 flex items-center gap-2 text-muted-foreground text-sm">
-          <MapPin className="w-4 h-4" />
-          <span>Los Angeles, CA · Open to relocation</span>
+        <div className="mt-12 flex flex-wrap items-center justify-between gap-4 text-muted-foreground text-sm">
+          <div className="flex items-center gap-2">
+            <MapPin className="w-4 h-4" />
+            <span>Los Angeles, CA · Open to relocation</span>
+          </div>
+          {count !== null && (
+            <div className="flex items-center gap-2 font-mono text-xs">
+              <Eye className="w-3.5 h-3.5 text-primary" />
+              <span className="uppercase tracking-wider text-[10px]">Profile visits</span>
+              <span className="text-foreground font-medium tabular-nums">
+                {count.toLocaleString()}
+              </span>
+            </div>
+          )}
         </div>
       </div>
     </section>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ThemeToggle } from "./ThemeToggle";
+import { useVisitCount } from "@/hooks/useVisitCount";
 
 const SECTIONS = [
   { id: "about", label: "About" },
@@ -16,6 +17,7 @@ const SECTIONS = [
 export const Navigation = () => {
   const [active, setActive] = useState("");
   const [scrolled, setScrolled] = useState(false);
+  const { count } = useVisitCount();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -85,8 +87,23 @@ export const Navigation = () => {
           ))}
         </div>
 
-        {/* Right: ⌘K + theme */}
+        {/* Right: visits + ⌘K + theme */}
         <div className="flex items-center gap-2">
+          {/* Visits counter */}
+          {count !== null && (
+            <div
+              className="hidden sm:flex items-center gap-1.5 px-2.5 h-9 rounded-md border border-border bg-card/50 text-xs"
+              title="Portfolio visits"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+              <span className="font-mono uppercase tracking-wider text-[10px] text-muted-foreground">
+                visits
+              </span>
+              <span className="font-mono font-medium text-foreground tabular-nums">
+                {count.toLocaleString()}
+              </span>
+            </div>
+          )}
           <button
             onClick={openPalette}
             className="hidden md:flex items-center gap-2 px-3 h-9 rounded-md border border-border bg-card/50 hover:bg-card hover:border-primary/40 transition-colors text-xs text-muted-foreground"

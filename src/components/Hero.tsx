@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef, MouseEvent } from "react";
 import { ArrowUpRight, ArrowDown, Github, Linkedin, FileText, Sparkles } from "lucide-react";
-import profileImage from "@/assets/dhruv.jpg";
 
 const roles = [
   "detection engineer",
@@ -140,105 +139,63 @@ export const Hero = () => {
           </span>
         </div>
 
-        {/* NAME + PHOTO row */}
-        <div className="flex items-center justify-between gap-8 mb-8">
-          {/* Name block */}
-          <div className="min-w-0">
-            {/* small kicker */}
-            <p
-              className="font-mono text-xs uppercase tracking-[0.3em] text-primary mb-3 animate-fade-up flex items-center gap-2"
-              style={{ animationDelay: "0.08s" }}
-            >
-              hey there <span className="inline-block animate-wave origin-bottom-right">👋</span> the name's
-            </p>
-
-            {/* Dhruv Ashok */}
-            <h1
-              className="font-serif font-medium leading-[0.84] tracking-tight animate-fade-up select-none"
-              style={{ fontSize: "clamp(3rem, 8vw, 8rem)", animationDelay: "0.1s" }}
-            >
-              {"Dhruv Ashok".split("").map((ch, i) => (
-                <span
-                  key={i}
-                  className={`inline-block transition-all duration-300 hover:text-primary hover:-translate-y-2 hover:scale-110 cursor-default ${
-                    ch === " " ? "w-[0.25em]" : ""
-                  }`}
-                  style={{ transitionDelay: `${i * 16}ms` }}
-                >
-                  {ch === " " ? "\u00A0" : ch}
-                </span>
-              ))}
-            </h1>
-
-            {/* Patel */}
-            <h1
-              className="font-serif italic font-medium leading-[0.84] tracking-tight animate-fade-up select-none flex items-baseline gap-2 md:gap-4 flex-wrap"
-              style={{ fontSize: "clamp(4rem, 11.5vw, 11.5rem)", animationDelay: "0.16s" }}
-            >
-              {"Patel".split("").map((ch, i) => (
-                <span
-                  key={i}
-                  className="inline-block transition-all duration-300 hover:text-primary hover:-translate-y-2 hover:scale-110 cursor-default"
-                  style={{ transitionDelay: `${i * 20}ms` }}
-                >
-                  {ch}
-                </span>
-              ))}
-              <span className="inline-block text-primary not-italic" style={{ fontSize: "0.2em" }}>
-                <Sparkles className="w-[1em] h-[1em] inline animate-pulse" />
-              </span>
-            </h1>
-          </div>
-
-          {/* Photo card — rounded rectangle reads more premium than a circle */}
-          <div
-            className="hidden md:block flex-shrink-0 animate-fade-up"
-            style={{ animationDelay: "0.2s" }}
+        {/* NAME row — text only, photo lives in About now */}
+        <div className="mb-6">
+          {/* small kicker */}
+          <p
+            className="font-mono text-xs uppercase tracking-[0.3em] text-primary mb-3 animate-fade-up flex items-center gap-2"
+            style={{ animationDelay: "0.08s" }}
           >
-            <div className="relative">
-              {/* Soft glow behind */}
-              <div
-                className="absolute -inset-4 rounded-3xl blur-2xl opacity-25"
-                style={{ background: "hsl(var(--primary))" }}
-              />
-              {/* Accent offset frame */}
-              <div
-                className="absolute -bottom-3 -right-3 w-full h-full rounded-2xl border border-primary/30"
-                aria-hidden
-              />
-              {/* Photo */}
-              <div
-                className="relative rounded-2xl overflow-hidden border border-border bg-card"
-                style={{ width: "clamp(200px, 21vw, 280px)" }}
+            hey there <span className="inline-block animate-wave origin-bottom-right">👋</span> the name's
+          </p>
+
+          {/* Dhruv Ashok */}
+          <h1
+            className="font-serif font-medium leading-[0.84] tracking-tight animate-fade-up select-none"
+            style={{ fontSize: "clamp(3rem, 8vw, 8rem)", animationDelay: "0.1s" }}
+          >
+            {"Dhruv Ashok".split("").map((ch, i) => (
+              <span
+                key={i}
+                className={`inline-block transition-all duration-300 hover:text-primary hover:-translate-y-2 hover:scale-110 cursor-default ${
+                  ch === " " ? "w-[0.25em]" : ""
+                }`}
+                style={{ transitionDelay: `${i * 16}ms` }}
               >
-                <div className="aspect-[4/5] overflow-hidden">
-                  <img
-                    src={profileImage}
-                    alt="Dhruv Ashok Patel"
-                    className="w-full h-full object-cover object-top scale-105"
-                  />
-                  {/* Bottom gradient fade for legibility */}
-                  <div
-                    className="absolute inset-x-0 bottom-0 h-1/3 pointer-events-none"
-                    style={{
-                      background:
-                        "linear-gradient(to top, hsl(var(--card)) 0%, transparent 100%)",
-                    }}
-                  />
-                </div>
-                {/* Caption bar */}
-                <div className="px-4 py-3 flex items-center justify-between border-t border-border">
-                  <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-foreground/70">
-                    Dhruv A. Patel
-                  </span>
-                  <span className="flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-wider text-primary">
-                    <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
-                    open to work
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
+                {ch === " " ? "\u00A0" : ch}
+              </span>
+            ))}
+          </h1>
+
+          {/* Patel */}
+          <h1
+            className="font-serif italic font-medium leading-[0.84] tracking-tight animate-fade-up select-none flex items-baseline gap-2 md:gap-4 flex-wrap"
+            style={{ fontSize: "clamp(4rem, 11.5vw, 11.5rem)", animationDelay: "0.16s" }}
+          >
+            {"Patel".split("").map((ch, i) => (
+              <span
+                key={i}
+                className="inline-block transition-all duration-300 hover:text-primary hover:-translate-y-2 hover:scale-110 cursor-default"
+                style={{ transitionDelay: `${i * 20}ms` }}
+              >
+                {ch}
+              </span>
+            ))}
+            <span className="inline-block text-primary not-italic" style={{ fontSize: "0.2em" }}>
+              <Sparkles className="w-[1em] h-[1em] inline animate-pulse" />
+            </span>
+          </h1>
+        </div>
+
+        {/* Tagline — where the photo used to sit */}
+        <div
+          className="flex items-center gap-4 mb-8 animate-fade-up"
+          style={{ animationDelay: "0.22s" }}
+        >
+          <span className="h-px bg-primary/50 w-8 md:w-16 flex-shrink-0" />
+          <p className="font-serif italic text-xl md:text-2xl text-foreground/90 leading-snug">
+            Building signals that catch what <span className="text-primary">signatures can't.</span>
+          </p>
         </div>
 
         {/* Subtitle — playful, with rotating role */}

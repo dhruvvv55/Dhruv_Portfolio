@@ -1,3 +1,5 @@
+import profileImage from "@/assets/dhruv.jpg";
+
 export const AboutMe = () => {
   return (
     <section id="about" className="relative py-24 md:py-36 border-t border-border">
@@ -21,14 +23,55 @@ export const AboutMe = () => {
         <div className="grid lg:grid-cols-[1fr,3fr,1fr] gap-8 lg:gap-12">
           {/* LEFT marginalia */}
           <aside className="hidden lg:block space-y-8 pt-1 animate-fade-up" style={{ animationDelay: "0.1s" }}>
+            {/* Byline photo — editorial treatment */}
+            <div>
+              <div className="relative">
+                {/* Soft glow */}
+                <div
+                  className="absolute -inset-3 rounded-2xl blur-xl opacity-25"
+                  style={{ background: "hsl(var(--primary))" }}
+                />
+                {/* Offset accent frame */}
+                <div
+                  className="absolute -bottom-2 -right-2 w-full h-full rounded-xl border border-primary/30"
+                  aria-hidden
+                />
+                {/* Photo card */}
+                <div className="relative rounded-xl overflow-hidden border border-border bg-card">
+                  <div className="aspect-[4/5] overflow-hidden">
+                    <img
+                      src={profileImage}
+                      alt="Dhruv Ashok Patel"
+                      className="w-full h-full object-cover object-top scale-105"
+                    />
+                    <div
+                      className="absolute inset-x-0 bottom-0 h-1/3 pointer-events-none"
+                      style={{
+                        background:
+                          "linear-gradient(to top, hsl(var(--card)) 0%, transparent 100%)",
+                      }}
+                    />
+                  </div>
+                  <div className="px-3 py-2.5 border-t border-border">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-foreground/85">
+                      Dhruv A. Patel
+                    </p>
+                    <p className="font-mono text-[9px] uppercase tracking-wider text-muted-foreground mt-0.5">
+                      USC · MS Cybersec Eng
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <div>
               <p className="font-mono text-[9px] uppercase tracking-[0.2em] text-muted-foreground mb-1.5">
                 Filed under
               </p>
               <p className="text-sm font-mono text-foreground/85 leading-relaxed">
-                application_security,<br />
-                ml_security,<br />
-                cryptography
+                detection_engineering,<br />
+                cloud_security,<br />
+                llm_agent_security
               </p>
             </div>
             <div>
