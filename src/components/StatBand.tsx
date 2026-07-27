@@ -17,16 +17,20 @@ const stats = [
 ];
 
 const tools = [
+  // Detection Engineering
+  "Wazuh", "Splunk", "Sigma", "MITRE ATT&CK", "Sysmon",
+  // Cloud
+  "GCP Cloud Audit Logs", "GCP IAM", "Cloud SCC",
+  // AI/LLM Security
+  "Prompt Injection", "MITRE ATLAS", "Agentic Detection",
+  // Malware Analysis
+  "Ghidra", "x64dbg", "scdbg", "CyberChef",
   // Languages
-  "Python", "Java", "C", "C++", "Bash", "PowerShell", "SQL",
-  // Security tools
-  "Wireshark", "Burp Suite", "Metasploit", "Autopsy", "EnCase", "Splunk", "Nessus",
-  // Cloud & systems
-  "AWS IAM", "AWS GuardDuty", "Linux", "Windows", "Active Directory",
-  // Frameworks & standards
-  "NIST", "ISO 27001", "MITRE ATT&CK", "OWASP",
-  // ML & dev
-  "TensorFlow", "Git", "REST APIs",
+  "Python", "Bash", "PowerShell", "C", "C++", "SQL", "JavaScript",
+  // Security Tools
+  "Wireshark", "Metasploit", "Nessus", "Nmap", "Burp Suite", "VirusTotal API",
+  // Systems
+  "Linux", "Active Directory",
 ];
 
 const marqueeStats = [...stats, ...stats];

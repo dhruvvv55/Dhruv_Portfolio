@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef, MouseEvent } from "react";
 import { ArrowUpRight, ArrowDown, Github, Linkedin, FileText, Sparkles } from "lucide-react";
+import { StatBand } from "./StatBand";
 
 const roles = [
   "detection engineer",
@@ -64,7 +65,7 @@ export const Hero = () => {
     <section
       id="top"
       ref={sectionRef}
-      className="relative min-h-screen flex flex-col justify-center pt-24 pb-8 overflow-hidden"
+      className="relative min-h-screen flex flex-col pt-24 pb-0 overflow-hidden"
     >
       {/* PARALLAX BACKGROUND SHAPES */}
       <div className="absolute inset-0 pointer-events-none">
@@ -123,7 +124,7 @@ export const Hero = () => {
       </div>
 
       {/* CONTENT */}
-      <div className="container mx-auto px-6 max-w-7xl relative z-10">
+      <div className="flex-1 flex flex-col justify-center container mx-auto px-6 max-w-7xl relative z-10">
         {/* Top status row — casual */}
         <div className="flex items-center justify-center gap-3 mb-10 animate-fade-up">
           <span className="relative flex h-2.5 w-2.5">
@@ -214,7 +215,7 @@ export const Hero = () => {
 
         {/* Action row — centered */}
         <div
-          className="flex flex-wrap items-center justify-center gap-3 mb-10 animate-fade-up"
+          className="flex flex-wrap items-center justify-center gap-3 animate-fade-up"
           style={{ animationDelay: "0.3s" }}
         >
           <button
@@ -254,6 +255,11 @@ export const Hero = () => {
             <Linkedin className="w-4 h-4" />
           </button>
         </div>
+      </div>
+
+      {/* Marquee — hero footer, no scroll needed to see it */}
+      <div className="relative z-10 mt-8">
+        <StatBand />
       </div>
 
       {/* Local styles for the animations */}

@@ -1,5 +1,4 @@
 import { Hero } from "@/components/Hero";
-import { StatBand } from "@/components/StatBand";
 import { AboutMe } from "@/components/AboutMe";
 import { Education } from "@/components/Education";
 import { Experience } from "@/components/Experience";
@@ -23,7 +22,6 @@ const Index = () => {
 
       <main className="relative">
         <Hero />
-        <StatBand />
         <AboutMe />
         <Education />
         <Experience />
