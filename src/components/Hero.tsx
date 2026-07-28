@@ -125,7 +125,7 @@ export const Hero = () => {
 
       {/* CONTENT */}
       <div className="flex-1 flex flex-col justify-center container mx-auto px-6 max-w-7xl relative z-10">
-        {/* Top status row — casual */}
+        {/* Top status row */}
         <div className="flex items-center justify-center gap-3 mb-10 animate-fade-up">
           <span className="relative flex h-2.5 w-2.5">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
@@ -142,12 +142,13 @@ export const Hero = () => {
 
         {/* NAME — centered, one line, same size, same style */}
         <div className="text-center mb-6">
-          {/* small kicker */}
+          {/* Terminal-style greeting with blinking cursor */}
           <p
-            className="font-mono text-xs uppercase tracking-[0.3em] text-primary mb-4 animate-fade-up flex items-center justify-center gap-2"
+            className="font-mono text-sm text-primary mb-4 animate-fade-up flex items-center justify-center gap-1"
             style={{ animationDelay: "0.08s" }}
           >
-            hey there <span className="inline-block animate-wave origin-bottom-right">👋</span> the name's
+            <span>$ whoami</span>
+            <span className="inline-block w-2 h-4 bg-primary animate-pulse ml-1" />
           </p>
 
           {/* Full name — one line, same font */}
@@ -179,12 +180,11 @@ export const Hero = () => {
         >
           <span className="h-px bg-primary/50 w-8 md:w-16 flex-shrink-0" />
           <p className="font-serif italic text-xl md:text-2xl text-foreground/90 leading-snug text-center">
-            Building signals that catch what <span className="text-primary">signatures can't.</span>
+            If it can be attacked, it can be <span className="text-primary">detected.</span>
           </p>
           <span className="h-px bg-primary/50 w-8 md:w-16 flex-shrink-0" />
         </div>
 
-        {/* Subtitle — playful, with rotating role */}
         <div
           className="flex items-baseline flex-wrap justify-center gap-x-3 gap-y-1 mb-5 animate-fade-up"
           style={{ animationDelay: "0.2s" }}
