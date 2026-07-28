@@ -16,13 +16,13 @@ type Phase = {
 };
 
 const phases: Phase[] = [
-  { target: 6,   duration: 220, logLine: "$ ssh dhruv@portfolio.exe",              logType: "cmd",     status: "Initializing..." },
-  { target: 18,  duration: 480, logLine: "→ establishing secure connection...",    logType: "info",    status: "TLS handshake..." },
-  { target: 34,  duration: 620, logLine: "→ verifying identity...",                logType: "info",    status: "Verifying identity..." },
-  { target: 52,  duration: 780, logLine: "→ decrypting credentials [AES-256-GCM]", logType: "info",    status: "Decrypting AES-256-GCM..." },
-  { target: 68,  duration: 540, logLine: "→ scanning for injection attacks...",    logType: "info",    status: "Scanning for injections..." },
-  { target: 84,  duration: 460, logLine: "→ signature match: dhruv.ashok.patel ✓", logType: "info",    status: "Verifying signature..." },
-  { target: 100, duration: 480, logLine: "→ authorization complete",               logType: "info",    status: "Finalizing..." },
+  { target: 6,   duration: 120, logLine: "$ ssh dhruv@portfolio.exe",              logType: "cmd",     status: "Initializing..." },
+  { target: 18,  duration: 260, logLine: "→ establishing secure connection...",    logType: "info",    status: "TLS handshake..." },
+  { target: 34,  duration: 340, logLine: "→ verifying identity...",                logType: "info",    status: "Verifying identity..." },
+  { target: 52,  duration: 420, logLine: "→ decrypting credentials [AES-256-GCM]", logType: "info",    status: "Decrypting AES-256-GCM..." },
+  { target: 68,  duration: 300, logLine: "→ scanning for injection attacks...",    logType: "info",    status: "Scanning for injections..." },
+  { target: 84,  duration: 260, logLine: "→ signature match: dhruv.ashok.patel ✓", logType: "info",    status: "Verifying signature..." },
+  { target: 100, duration: 260, logLine: "→ authorization complete",               logType: "info",    status: "Finalizing..." },
 ];
 
 type Stage = "loading" | "granted" | "done";
@@ -81,7 +81,7 @@ export const BootScreen = ({ onDone }: { onDone: () => void }) => {
       if (cancelled) return;
       clearInterval(speedInterval);
       // Pause a beat at 100%, then jump to granted stage
-      await new Promise((r) => setTimeout(r, 500));
+      await new Promise((r) => setTimeout(r, 250));
       if (cancelled) return;
       setStage("granted");
       // Sit on ACCESS GRANTED for 1.6s, then start fade
