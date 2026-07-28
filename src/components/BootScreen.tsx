@@ -4,7 +4,7 @@ import { ShieldCheck } from "lucide-react";
 /**
  * BootScreen — 2-stage boot:
  *   Stage 1: Terminal with live progress bar (loading)
- *   Stage 2: Full-screen ACCESS GRANTED takeover (techy — matrix rain, scan lines, glitch)
+ *   Stage 2: Full-screen ACCESS GRANTED takeover (matrix rain, scan lines, glitch)
  */
 
 type Phase = {
@@ -80,15 +80,12 @@ export const BootScreen = ({ onDone }: { onDone: () => void }) => {
       }
       if (cancelled) return;
       clearInterval(speedInterval);
-      // Pause a beat at 100%, then jump to granted stage
       await new Promise((r) => setTimeout(r, 250));
       if (cancelled) return;
       setStage("granted");
-      // Sit on ACCESS GRANTED for 1.6s, then start fade
-      await new Promise((r) => setTimeout(r, 1600));
+      await new Promise((r) => setTimeout(r, 700));
       if (cancelled) return;
       setStage("done");
-      // Wait for fade animation
       await new Promise((r) => setTimeout(r, 700));
       if (!cancelled) onDone();
     })();
@@ -99,59 +96,58 @@ export const BootScreen = ({ onDone }: { onDone: () => void }) => {
     };
   }, [onDone]);
 
-  // ── Matrix rain canvas (only during granted stage) ───
+  // ── Matrix rain canvas (only during granted stage, optimized) ───
   useEffect(() => {
     if (stage !== "granted") return;
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d");
+    const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
 
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+    canvas.style.width = `${w}px`;
+    canvas.style.height = `${h}px`;
+    ctx.scale(dpr, dpr);
 
-    const chars = "01アイウエオカキクケコサシスセソタチツテトナニヌネノ<>{}[]#$%&*+=~^ABCDEF0123456789";
-    const fontSize = 14;
-    const columns = Math.floor(canvas.width / fontSize);
-    const drops: number[] = Array(columns).fill(1).map(() => Math.random() * -50);
+    const chars = "01アイウエオカキクケコ<>{}[]#$%&*+=ABCDEF0123456789";
+    const fontSize = 16;
+    const columns = Math.floor(w / fontSize);
+    const drops: number[] = Array(columns).fill(0).map(() => Math.random() * -30);
 
     let animationId: number;
-    const draw = () => {
+    let lastTime = 0;
+    const frameInterval = 1000 / 24; // Cap at 24 fps — matrix rain doesn't need 60
+
+    const draw = (time: number) => {
+      if (time - lastTime < frameInterval) {
+        animationId = requestAnimationFrame(draw);
+        return;
+      }
+      lastTime = time;
+
       // Fade previous frame
-      ctx.fillStyle = "rgba(10, 12, 20, 0.08)";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "rgba(10, 12, 20, 0.14)";
+      ctx.fillRect(0, 0, w, h);
 
       ctx.font = `${fontSize}px 'JetBrains Mono', monospace`;
       ctx.fillStyle = "hsl(75, 90%, 60%)";
+      ctx.globalAlpha = 0.75;
 
       for (let i = 0; i < drops.length; i++) {
         const ch = chars[Math.floor(Math.random() * chars.length)];
-        const x = i * fontSize;
-        const y = drops[i] * fontSize;
-        // Lead character brighter
-        ctx.globalAlpha = 0.85;
-        ctx.fillText(ch, x, y);
-        // Trail faint
-        ctx.globalAlpha = 0.35;
-        ctx.fillText(ch, x, y - fontSize);
-
-        if (y > canvas.height && Math.random() > 0.975) drops[i] = 0;
+        ctx.fillText(ch, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > h && Math.random() > 0.97) drops[i] = 0;
         drops[i] += 1;
       }
       animationId = requestAnimationFrame(draw);
     };
-    draw();
+    animationId = requestAnimationFrame(draw);
 
-    const onResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-    window.addEventListener("resize", onResize);
-
-    return () => {
-      cancelAnimationFrame(animationId);
-      window.removeEventListener("resize", onResize);
-    };
+    return () => cancelAnimationFrame(animationId);
   }, [stage]);
 
   const progressInt = Math.floor(progress);
@@ -273,22 +269,13 @@ export const BootScreen = ({ onDone }: { onDone: () => void }) => {
       {/* ─── STAGE 2: ACCESS GRANTED TAKEOVER ─── */}
       {stage === "granted" && (
         <>
-          {/* Matrix rain canvas */}
+          {/* Matrix rain canvas (optimized: 24fps cap, single fillText per column) */}
           <canvas
             ref={canvasRef}
             className="absolute inset-0 pointer-events-none opacity-40"
           />
 
-          {/* Horizontal scan line */}
-          <div
-            className="absolute inset-x-0 h-24 pointer-events-none animate-scan-line"
-            style={{
-              background:
-                "linear-gradient(to bottom, transparent 0%, hsl(var(--primary) / 0.15) 50%, transparent 100%)",
-            }}
-          />
-
-          {/* Vignette + noise overlay */}
+          {/* Vignette overlay */}
           <div
             className="absolute inset-0 pointer-events-none"
             style={{
@@ -343,7 +330,7 @@ export const BootScreen = ({ onDone }: { onDone: () => void }) => {
               </div>
             </div>
 
-            {/* Corner brackets — CRT frame feel */}
+            {/* Corner brackets */}
             <div className="absolute -top-8 -left-8 w-6 h-6 border-l-2 border-t-2 border-primary" />
             <div className="absolute -top-8 -right-8 w-6 h-6 border-r-2 border-t-2 border-primary" />
             <div className="absolute -bottom-8 -left-8 w-6 h-6 border-l-2 border-b-2 border-primary" />
@@ -365,13 +352,7 @@ export const BootScreen = ({ onDone }: { onDone: () => void }) => {
           40% { opacity: 1; filter: blur(0); }
           100% { opacity: 1; transform: scale(1); filter: blur(0); }
         }
-        .animate-granted-in { animation: grantedIn 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-
-        @keyframes scanLine {
-          0% { transform: translateY(-100%); }
-          100% { transform: translateY(100vh); }
-        }
-        .animate-scan-line { animation: scanLine 2s linear infinite; }
+        .animate-granted-in { animation: grantedIn 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
 
         /* Glitch text — RGB-split flicker */
         .glitch-text {
