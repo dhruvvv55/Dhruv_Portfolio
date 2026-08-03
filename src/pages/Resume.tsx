@@ -69,7 +69,7 @@ const Resume = () => {
                 <h1 className="text-4xl md:text-5xl font-medium tracking-tight">
                   Dhruv Patel <span className="font-serif italic text-primary">— Resume</span>
                 </h1>
-                <p className="text-muted-foreground mt-2 font-mono text-sm">Last updated: November 2025</p>
+                <p className="text-muted-foreground mt-2 font-mono text-sm">Last updated: August 2026</p>
               </div>
 
               <div className="flex flex-wrap gap-2">
@@ -130,7 +130,7 @@ const Resume = () => {
                 <FileText className="w-3.5 h-3.5 text-muted-foreground" />
                 <span className="text-xs text-muted-foreground font-mono">
                   {pdfStatus === "loading" && "checking..."}
-                  {pdfStatus === "found" && "PDF · 2 pages"}
+                  {pdfStatus === "found" && "PDF · 1 page"}
                   {pdfStatus === "missing" && "not deployed"}
                 </span>
               </div>
