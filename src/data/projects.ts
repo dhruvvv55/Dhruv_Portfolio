@@ -3,7 +3,7 @@
    Source of truth: latest resume (detection engineering focus).
    ───────────────────────────────────────────────────────────── */
 
-import { Radar, Cloud, Bot, ShieldCheck, Cpu } from "lucide-react";
+import { Siren, Radar, Cloud, Bot, ShieldCheck, Cpu } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 export type ProjectStep = {
@@ -31,6 +31,70 @@ export type Project = {
 };
 
 export const PROJECTS: Project[] = [
+  {
+    slug: "aws-detection-pipeline",
+    title: "AWS Detection and Auto-Remediation Pipeline",
+    category: "CLOUD SECURITY · AWS",
+    icon: Siren,
+    status: "Complete",
+    headline:
+      "Watches an AWS account for 3 risky changes and reverts them in seconds. Terraform-deployed, MITRE-mapped, 100% remediation across 30 runs.",
+    description:
+      "A Terraform-deployed AWS pipeline that watches an account for public S3 buckets, IAM privilege escalation, and security groups open to the internet, and auto-remediates each one in seconds. Every finding mapped to MITRE ATT&CK, stored in DynamoDB, and alerted via SNS.",
+    tech: [
+      "AWS",
+      "Terraform",
+      "Python",
+      "Lambda",
+      "CloudTrail",
+      "EventBridge",
+      "SQS",
+      "DynamoDB",
+      "SNS",
+      "MITRE ATT&CK",
+    ],
+    github: "https://github.com/dhruvvv55/aws-detection-pipeline",
+    featured: true,
+    metrics: [
+      { value: "2.9s", label: "Median IAM remediation" },
+      { value: "100%", label: "Remediation success across 30 runs" },
+      { value: "3", label: "MITRE ATT&CK techniques covered" },
+    ],
+    fullDescription:
+      "A production-pattern AWS security pipeline that watches a single account for three of the most dangerous misconfigurations (S3 buckets going public, IAM privilege escalation, SSH or RDP exposed to the world) and reverts the change automatically within seconds. Every detection is mapped to MITRE ATT&CK (T1530, T1098.003, T1562.007), scoped to remove-only IAM permissions so a compromised Lambda could only take access away, and the full infrastructure stands up with a single terraform apply. Written in Python 3.11, 60 pytest tests, dry-run mode for safe rollout, tag-based allowlisting so legitimate public resources don't get touched.",
+    systemOverview:
+      "CloudTrail captures every API call in the account, EventBridge rules match the specific calls each detection cares about, events drop into SQS (buffers bursts, retries 3x, dead-letter queue on persistent failures), Python Lambda reads from queue and runs the matching detection, reverts the change with a single API call, writes a finding to DynamoDB with full context (who, from where, which ATT&CK technique, what fix, how fast), and SNS publishes an email alert.",
+    workflow: [
+      {
+        title: "Infra as code",
+        body: "Everything deployed with Terraform. One terraform apply stands up the full pipeline. One terraform destroy tears it down. $5 monthly budget alert included so you can't accidentally run up a bill.",
+      },
+      {
+        title: "Event ingestion",
+        body: "CloudTrail to EventBridge to SQS to Lambda. SQS sits in the middle so no event ever gets silently dropped, bursts get absorbed, and failures land in a dead-letter queue instead of vanishing.",
+      },
+      {
+        title: "S3 public bucket detection",
+        body: "Catches public buckets made via policy wildcards, ACL grants to AllUsers, or Block Public Access being turned off. Reverts by re-enabling all four BPA settings. Maps to T1530.",
+      },
+      {
+        title: "IAM privilege escalation detection",
+        body: "Catches AdministratorAccess attaches, admin inline policies, access keys created for other users, and additions to admin groups. Detaches, deletes, or deactivates depending on the change. Keys get deactivated rather than deleted so CloudTrail still has the audit trail. Maps to T1098.003 and T1098.001.",
+      },
+      {
+        title: "Security group exposure detection",
+        body: "Catches 0.0.0.0/0 or ::/0 on port 22 or 3389. Revokes only the specific rule that was added, so if someone opens SSH and HTTPS in the same call, only SSH gets closed. Maps to T1562.007.",
+      },
+      {
+        title: "Safety rails",
+        body: "Lambda IAM role has remove-only permissions, so a compromised function could only strip access, never grant it. SQS queue policy explicitly denies any sender except the three EventBridge rules. Dry-run mode logs findings without reverting, for safe rollout. Tag-based allowlisting lets legitimate public resources opt out.",
+      },
+      {
+        title: "Benchmarked",
+        body: "30 timed runs across all 3 detections. Median: 2.9s for IAM, 4.4s for security groups, 9.5s for S3. The pipeline's own code accounts for less than 0.6s of that. 100% remediation rate.",
+      },
+    ],
+  },
   {
     slug: "soc-detection-lab",
     title: "SOC Detection Engineering Lab",
