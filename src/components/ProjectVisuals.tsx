@@ -754,6 +754,74 @@ export const AgentLabHero = () => (
 );
 
 /* ============================================================
+   AWS DETECTION PIPELINE — CloudTrail → EventBridge → SQS → Lambda
+   ============================================================ */
+
+export const AwsPipelineHero = () => (
+  <svg viewBox="0 0 400 250" className="w-full h-full" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <pattern id="aws-grid" width="20" height="20" patternUnits="userSpaceOnUse">
+        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="hsl(var(--primary) / 0.08)" strokeWidth="0.5" />
+      </pattern>
+      <linearGradient id="aws-line" x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0%" stopColor="hsl(var(--primary))" stopOpacity="0" />
+        <stop offset="50%" stopColor="hsl(var(--primary))" stopOpacity="1" />
+        <stop offset="100%" stopColor="hsl(var(--primary))" stopOpacity="0" />
+      </linearGradient>
+    </defs>
+    <rect width="400" height="250" fill="url(#aws-grid)" />
+
+    {/* Header row */}
+    <g transform="translate(20, 20)">
+      <rect width="140" height="22" rx="11" fill="hsl(var(--primary) / 0.15)" stroke="hsl(var(--primary) / 0.4)" />
+      <circle cx="12" cy="11" r="3" fill="hsl(var(--primary))">
+        <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite" />
+      </circle>
+      <text x="22" y="15" fill="hsl(var(--primary))" fontSize="9" fontFamily="JetBrains Mono" letterSpacing="0.05em">AWS · AUTO-REMEDIATE</text>
+    </g>
+    <text x="380" y="35" fill="hsl(var(--muted-foreground))" fontFamily="JetBrains Mono" fontSize="9" textAnchor="end">2.9s median · 100%</text>
+
+    {/* Pipeline nodes */}
+    {[
+      { x: 15,  label: "CloudTrail" },
+      { x: 100, label: "EventBridge" },
+      { x: 195, label: "SQS" },
+      { x: 275, label: "Lambda" },
+    ].map((n, i) => (
+      <g key={i} transform={`translate(${n.x}, 110)`}>
+        <rect width="75" height="36" rx="6" fill="hsl(var(--card))" stroke="hsl(var(--primary) / 0.4)" strokeWidth="1" />
+        <text x="37.5" y="22" fill="hsl(var(--foreground))" fontFamily="JetBrains Mono" fontSize="9" textAnchor="middle">{n.label}</text>
+      </g>
+    ))}
+    {/* Connecting flow lines */}
+    <line x1="90"  y1="128" x2="100" y2="128" stroke="url(#aws-line)" strokeWidth="1.5" />
+    <line x1="175" y1="128" x2="195" y2="128" stroke="url(#aws-line)" strokeWidth="1.5" />
+    <line x1="270" y1="128" x2="275" y2="128" stroke="url(#aws-line)" strokeWidth="1.5" />
+
+    {/* Arrow at end pointing to remediation */}
+    <g transform="translate(350, 128)">
+      <polygon points="0,-6 10,0 0,6" fill="hsl(var(--primary))" />
+      <text x="4" y="20" fill="hsl(var(--primary))" fontSize="8" fontFamily="JetBrains Mono" textAnchor="middle">fix</text>
+    </g>
+
+    {/* ATT&CK tags */}
+    <g transform="translate(20, 200)" fontFamily="JetBrains Mono" fontSize="8">
+      {[
+        { tag: "T1530", label: "S3" },
+        { tag: "T1098.003", label: "IAM" },
+        { tag: "T1562.007", label: "SG" },
+      ].map((t, i) => (
+        <g key={t.tag} transform={`translate(${i * 100}, 0)`}>
+          <rect width="88" height="22" rx="4" fill="hsl(var(--primary) / 0.08)" stroke="hsl(var(--primary) / 0.3)" />
+          <text x="10" y="14" fill="hsl(var(--primary))">{t.tag}</text>
+          <text x="78" y="14" fill="hsl(var(--muted-foreground))" textAnchor="end">{t.label}</text>
+        </g>
+      ))}
+    </g>
+  </svg>
+);
+
+/* ============================================================
    Lookup map — used by Projects.tsx and ProjectDetail.tsx
    ============================================================ */
 
@@ -761,6 +829,7 @@ export const projectVisuals: Record<
   string,
   { hero: () => JSX.Element; architecture?: () => JSX.Element }
 > = {
+  "aws-detection-pipeline": { hero: AwsPipelineHero },
   "soc-detection-lab": { hero: SocLabHero },
   "cloud-threat-detection-lab": { hero: CloudLabHero },
   "agent-injection-lab": { hero: AgentLabHero },
